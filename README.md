@@ -17,17 +17,17 @@
 
 ### Iteration 0 & 1
 
-- “README.txt” file explaining the names of your files, set up instructions, etc. 
 - UML Class Diagram
 - State machine diagram for the scheduler and elevator subsystems
+
 - Detailed set up and test instructions, including test files used
 - Code
 
 Hasan
--
+- 
 
 George
--
+- “README.txt” file explaining the names of your files, set up instructions, etc. 
 
 Komiljon
 -
