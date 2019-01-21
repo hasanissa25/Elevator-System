@@ -1,9 +1,9 @@
 # SYSC 3303 Lab 5 Group 2
 
-Hasan [@hasanissa25](https://github.com/hasanissa25)
-George [@george-carleton](https://github.com/george-carleton)
-Komiljon [@komiljon27](https://github.com/komiljon27)
-Jack [@JackTurner98](https://github.com/JackTurner98)
+#### Hasan [@hasanissa25](https://github.com/hasanissa25)
+#### George [@george-carleton](https://github.com/george-carleton)
+#### Komiljon [@komiljon27](https://github.com/komiljon27)
+#### Jack [@JackTurner98](https://github.com/JackTurner98)
 
 ## Instructions:
 1.
