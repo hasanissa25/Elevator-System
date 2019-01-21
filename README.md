@@ -21,3 +21,7 @@
 ## Breakdown of Responsibilities
 
 ###
+
+
+
+komiljon27
