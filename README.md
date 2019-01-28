@@ -18,7 +18,8 @@
 ### Iteration 0 & 1
 
 - UML Class Diagram: https://bit.ly/2sUjB9y
-- State Machine Diagram: http://bit.ly/2RozLSu
+- State Machine Diagram Elevator: http://bit.ly/2RozLSu
+- State Machine Diagram Floor: http://bit.ly/2Wqvems
 - State machine diagram for the scheduler and elevator subsystems
 - “README.txt” file explaining the names of your files, set up instructions, etc. 
 - Detailed set up and test instructions, including test files used
