@@ -19,15 +19,14 @@
 
 - UML Class Diagram: https://bit.ly/2Mrv6P2
 - State machine diagram for the scheduler and elevator subsystems
-
+- “README.txt” file explaining the names of your files, set up instructions, etc. 
 - Detailed set up and test instructions, including test files used
-- Code
 
 Hasan
 - 
 
 George
-- “README.txt” file explaining the names of your files, set up instructions, etc. 
+- 
 
 Komiljon
 -
