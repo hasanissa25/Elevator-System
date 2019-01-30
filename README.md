@@ -39,7 +39,7 @@ George
 
 ## Komiljon
 - Google Drive
--- State Machine Diagrams 
+ - State Machine Diagrams 
 
 Jack
 -
