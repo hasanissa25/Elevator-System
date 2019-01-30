@@ -43,8 +43,8 @@ George
     - http://bit.ly/2RozLSu
   - [x] State Machine Diagram For Floor: 
     - http://bit.ly/2Tmf1gb
-  - [ ] State Machine Diagram for Scheduler
-    - 
+  - [ ] State Machine Diagram for Scheduler:
+    - http://bit.ly/2Siks2q
     
 
 Jack
