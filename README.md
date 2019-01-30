@@ -23,6 +23,7 @@ Professor Emails:
 Also, for this iteration, you don't need to handle the input file.  It is easier to develop JUnit test for the elevator state machine itself to check all transitions, and another test to ensure that messages are being passed successfully between the scheduler and the elevator.  The latter test should amount to "request elevator at floor N, expect elevator arrival, go to floor M, expect elevator arrival".  There is no need to incorporate time in this iteration, nor is there a need to handle floor requests while the elevator is "moving" between floors.  
 If you have done more, I seem to recall that you should be using version control (Git, Subversion, Mercurial, Visual source safe, ClearCase, CVS (eww), bazaar, bit keeper,  GNU arch, Montone, DARCS... ) so here's your chance to use branching. 
  
+- Google drive folder for the project: http://bit.ly/2HGr5Yl
 - UML Class Diagram: https://bit.ly/2sUjB9y
 - State Machine Diagram Elevator: http://bit.ly/2RozLSu
 - State Machine Diagram Floor: http://bit.ly/2Wqvems
