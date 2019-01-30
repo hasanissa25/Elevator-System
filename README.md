@@ -39,7 +39,11 @@ George
 
 ## Komiljon
 - Google Drive
-  - State Machine Diagrams 
+  - [x] State Machine Diagram For Elevator: 
+    - http://bit.ly/2RozLSu
+  - [ ] State Machine Diagram For Floor: 
+    - http://bit.ly/2Wqvems
+    
 
 Jack
 -
