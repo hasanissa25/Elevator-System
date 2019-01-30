@@ -31,10 +31,10 @@ If you have done more, I seem to recall that you should be using version control
 - “README.txt” file explaining the names of your files, set up instructions, etc. 
 - Detailed set up and test instructions, including test files used
 
-Hasan
+####Hasan
 - Project Document study to help with the uml: https://docs.google.com/document/d/1BHV_G2eLSaxyXDfcedn_ym8igDu5b2ToxtycJc_ceD0/edit?usp=sharing
 
-George
+####George
 - 
 
 #### Komiljon
