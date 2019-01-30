@@ -24,7 +24,7 @@ Also, for this iteration, you don't need to handle the input file.  It is easier
 If you have done more, I seem to recall that you should be using version control (Git, Subversion, Mercurial, Visual source safe, ClearCase, CVS (eww), bazaar, bit keeper,  GNU arch, Montone, DARCS... ) so here's your chance to use branching. 
  
 - Google drive folder for the project: http://bit.ly/2HGr5Yl
-- UML Class Diagram: https://bit.ly/2sUjB9y
+- UML Class Diagram: http://bit.ly/2Sip2Oa
 - State Machine Diagram Elevator: http://bit.ly/2RozLSu
 - State Machine Diagram Floor: http://bit.ly/2Tmf1gb
 - State machine diagram for the scheduler and elevator subsystems
@@ -43,7 +43,7 @@ George
     - http://bit.ly/2RozLSu
   - [x] State Machine Diagram For Floor: 
     - http://bit.ly/2Tmf1gb
-  - [ ] State Machine Diagram for Scheduler:
+  - [x] State Machine Diagram for Scheduler:
     - http://bit.ly/2Siks2q
     
 
