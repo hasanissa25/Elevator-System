@@ -26,7 +26,7 @@ If you have done more, I seem to recall that you should be using version control
 - Google drive folder for the project: http://bit.ly/2HGr5Yl
 - UML Class Diagram: https://bit.ly/2sUjB9y
 - State Machine Diagram Elevator: http://bit.ly/2RozLSu
-- State Machine Diagram Floor: http://bit.ly/2Wqvems
+- State Machine Diagram Floor: http://bit.ly/2Tmf1gb
 - State machine diagram for the scheduler and elevator subsystems
 - “README.txt” file explaining the names of your files, set up instructions, etc. 
 - Detailed set up and test instructions, including test files used
@@ -42,7 +42,7 @@ George
   - [x] State Machine Diagram For Elevator: 
     - http://bit.ly/2RozLSu
   - [ ] State Machine Diagram For Floor: 
-    - http://bit.ly/2Wqvems
+    - http://bit.ly/2Tmf1gb
     
 
 Jack
