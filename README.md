@@ -37,8 +37,9 @@ Hasan
 George
 - 
 
-Komiljon
--
+#### Komiljon
+- Google Drive
+ - State Machine Diagrams 
 
 Jack
 -
