@@ -37,9 +37,9 @@ If you have done more, I seem to recall that you should be using version control
 George
 - 
 
-#### Komiljon
+## Komiljon
 - Google Drive
- - State Machine Diagrams 
+-- State Machine Diagrams 
 
 Jack
 -
