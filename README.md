@@ -41,8 +41,10 @@ George
 - Google Drive
   - [x] State Machine Diagram For Elevator: 
     - http://bit.ly/2RozLSu
-  - [ ] State Machine Diagram For Floor: 
+  - [x] State Machine Diagram For Floor: 
     - http://bit.ly/2Tmf1gb
+  - [ ] State Machine Diagram for Scheduler
+    - 
     
 
 Jack
