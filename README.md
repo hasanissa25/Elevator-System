@@ -34,6 +34,8 @@ If you have done more, I seem to recall that you should be using version control
 ## Hasan
 - Project Document study to help with the uml: https://docs.google.com/document/d/1BHV_G2eLSaxyXDfcedn_ym8igDu5b2ToxtycJc_ceD0/edit?usp=sharing
 - UML Class Diagram: http://bit.ly/2Sip2Oa
+- Set up classes and created method placeholders 
+- Set up getters and setters
 
 
 ## George
