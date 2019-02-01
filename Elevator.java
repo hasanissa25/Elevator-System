@@ -5,15 +5,17 @@ import java.text.SimpleDateFormat;
 
 public class Elevator {
 
-  private int PORT;
-  private DatagramSocket socket;
-  private Calendar cal;
-  private SimpleDateFormat time;
+  public void turnOffElevatorLamp(int floorNumber) {}
+  public void handleElevatorButtonPressed(int floorNumber) {}
+  public void openDoor() {}
+  public void closeDoor() {}
+  public void motorUp() {}
+  public void motorDown() {}
+  public void motorStop() {}
 
   public Elevator() {}
 
-  public void run() {}
-
+ 
   public static void main(String[] args) {}
 
 }
