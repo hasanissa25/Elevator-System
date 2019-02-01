@@ -1,4 +1,8 @@
-
+/*	
+ * Author: Hasan Issa
+ * Contributors:
+ * 
+ */
 public class ArrivalSensor {
 
 	private int currentFloorAt;

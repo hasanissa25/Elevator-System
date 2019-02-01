@@ -1,4 +1,8 @@
-
+/*	
+ * Author: Hasan Issa
+ * Contributors:
+ * 
+ */
 public class ElevatorLamp {
 	private boolean lampStatus;
 	private int floorDisplayNumber;

@@ -1,4 +1,8 @@
-
+/*	
+ * Author: Hasan Issa
+ * Contributors:
+ * 
+ */
 public class ElevatorMotor {
 	
 	private ElevatorMotorEnum motorState;

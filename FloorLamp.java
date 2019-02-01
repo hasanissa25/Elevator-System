@@ -1,4 +1,8 @@
-
+/*	
+ * Author: Hasan Issa
+ * Contributors:
+ * 
+ */
 public class FloorLamp {
 	private boolean lampStatus;
 

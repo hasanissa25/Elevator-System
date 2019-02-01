@@ -1,4 +1,8 @@
-
+/*	
+ * Author: Hasan Issa
+ * Contributors:
+ * 
+ */
 public class DirectionLamp {
 	private Direction directionState;
 	private int currentFloorNumber;

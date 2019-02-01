@@ -1,4 +1,8 @@
-
+/*	
+ * Author: Hasan Issa
+ * Contributors:
+ * 
+ */
 public class FloorSubsystemSimulation {
 	private int numberOfFloor;
 	public void pressFloorUp(int currentFloorNumber) {} 

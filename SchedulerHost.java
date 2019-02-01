@@ -1,3 +1,8 @@
+/*	
+ * Author: Hasan Issa
+ * Contributors:
+ * 
+ */
 import java.net.DatagramSocket;
 
 public class SchedulerHost {
