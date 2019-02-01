@@ -1,4 +1,6 @@
 import java.util.*;
+import java.io.*;
+import java.net.*;
 
 public class Message {
 
@@ -11,10 +13,16 @@ public class Message {
 
   public Message() {}
 
-  public byte[] requestFloorMessage(ArrayList<String>) {}
+  public byte[] requestFloorMessage(ArrayList<String> ArrList) {
+	  return byte[];
+  }
 
-  public byte[] responseElevatorMessage() {}
+  public byte[] responseElevatorMessage() {
+	  return byte[];
+  }
 
-  public byte[] addArray(byte[], int, byte[]) {}
+  public byte[] addArray(byte[] temp1, int temp2, byte[] temp3) {
+	  return byte[];
+  }
 
 }

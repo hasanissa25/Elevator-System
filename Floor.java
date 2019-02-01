@@ -1,4 +1,7 @@
 import java.util.*;
+import java.io.*;
+import java.net.*;
+import java.text.SimpleDateFormat;
 
 public class Floor {
 
@@ -14,7 +17,7 @@ public class Floor {
 
   public Floor() {}
 
-  public void sendAndReceive(String) {}
+  public void sendAndReceive(String command) {}
 
   public void run() {}
 
