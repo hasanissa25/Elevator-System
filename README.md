@@ -36,8 +36,8 @@ If you have done more, I seem to recall that you should be using version control
 - UML Class Diagram: http://bit.ly/2Sip2Oa
 
 
-George
-- 
+## George
+- Transfer UML to framework code
 
 ## Komiljon
 - Google Drive
