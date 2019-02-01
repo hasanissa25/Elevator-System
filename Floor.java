@@ -5,22 +5,22 @@ import java.text.SimpleDateFormat;
 
 public class Floor {
 
-  private int PORT;
-  private String FILE_NAME;
-  private DatagramSocket socket;
-  private DatagramPacket packet;
-  private Calendar cal;
-  private SimpleDateFormat time;
-  private InetAddress IPAddress;
-  private InetAddress holdAddress;
-  private int holdPort;
-
-  public Floor() {}
-
-  public void sendAndReceive(String command) {}
-
-  public void run() {}
-
-  public static void main(String[] args) {}
-
+	private int floorNumber;
+	
+	public void handleButtonPressed(Direction direction) {}
+	public void pressFloorDownBottom(){}
+	public void pressFloorUpBottom(){}
+	public void pressFloorUp(int currentFloorNumber) {}
+	public boolean getFloorUpLampStatus() {
+		return false;
+	}
+	public boolean getFloorDownLampStatus() {
+		return false;
+	}
+	public int getFloorNumber() {
+		return floorNumber;
+	}
+	public void setFloorNumber(int floorNumber) {
+		this.floorNumber = floorNumber;
+	} 
 }

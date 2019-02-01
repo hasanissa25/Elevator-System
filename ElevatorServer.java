@@ -11,4 +11,16 @@ public class ElevatorServer {
 	private void sendElevatorButtonRequest(int floorNumber) {
 		
 	}
+	public int getPortNumber() {
+		return portNumber;
+	}
+	public void setPortNumber(int portNumber) {
+		this.portNumber = portNumber;
+	}
+	public DatagramSocket getServerSocket() {
+		return serverSocket;
+	}
+	public void setServerSocket(DatagramSocket serverSocket) {
+		this.serverSocket = serverSocket;
+	}
 }

@@ -4,17 +4,17 @@ import java.net.*;
 import java.text.SimpleDateFormat;
 
 public class Elevator {
+	public Elevator() {}
 
-  public void turnOffElevatorLamp(int floorNumber) {}
-  public void handleElevatorButtonPressed(int floorNumber) {}
-  public void openDoor() {}
-  public void closeDoor() {}
-  public void motorUp() {}
-  public void motorDown() {}
-  public void motorStop() {}
+	public void turnOffElevatorLamp(int floorNumber) {}
+	public void handleElevatorButtonPressed(int floorNumber) {}
+	public void openDoor() {}
+	public void closeDoor() {}
+	public void motorUp() {}
+	public void motorDown() {}
+	public void motorStop() {}
 
-  public Elevator() {}
-
+ 
  
   public static void main(String[] args) {}
 
