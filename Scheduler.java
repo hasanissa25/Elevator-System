@@ -1,7 +1,4 @@
 import java.util.*;
-import java.io.*;
-import java.net.*;
-import java.text.SimpleDateFormat;
 
 public class Scheduler {
 
@@ -21,7 +18,52 @@ public class Scheduler {
 
   public Scheduler() {}
 
-  public void run() {}
+  public void run() {
+	  
+	  int currState = getCurrentState();
+	  
+	  switch (currState) {
+	  
+	  	case IDLE_STATE:
+	  		int currRequest = getRequest();
+	  		
+	  		if (currRequest == DOWN_REQUEST) {
+	  			setState(DOWN_REQUEST_STATE);
+	  		}
+	  		else if(currRequest == UP_REQUEST) {
+	  			setState(UP_REQUEST_STATE);
+	  		}
+	  		break;
+	  		
+	  	case DOWN_REQUEST_STATE:
+	  		int elevatorNum = findElevator(floorNumber, DOWN);
+	  		if(elevatorNum != -1) {
+	  			sendElevator(elevatorNum, floorNum, DOWN)
+	  			setState(DOWN_REQUEST_SENT)
+	  		}
+	  		break;
+	  		
+	  	case UP_REQUEST_STATE:
+	  		int elevatorNum = findElevator(floorNumber, UP);
+	  		if(elevatorNum != -1) {
+	  			sendElevator(elevatorNum, floorNum, UP)
+	  			setState(UP_REQUEST_SENT)
+	  		}
+	  		break;
+	  		
+	  	case UP_REQUEST_SENT:
+	  		
+	  		break;
+	  		
+	  	case DOWN_REQUEST_SENT:
+	  		
+	  		break;
+	  
+	  
+	  }
+	  
+	  
+  }
 
   public static void main(String[] args) {}
 
