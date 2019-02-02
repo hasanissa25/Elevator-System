@@ -3,7 +3,7 @@
  * Contributors:
  * This is a simulation that triggers events  
  */
-public class FloorSubsystemSimulation {
+public class SystemSimulation {
 	private int numberOfFloor;
 	public void pressFloorUp(int currentFloorNumber) {} 
 	public void pressFloorDown(int currentFloorNumber) {} 
