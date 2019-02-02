@@ -1,9 +1,13 @@
+package sysc3303.group2.elevatorsystem.scheduler;
 /*	
  * Author: Hasan Issa
  * Contributors:
  * This schedules the events and floor requests and elevator requests and ensures safety of the entire system
  */
 import java.util.*;
+
+import sysc3303.group2.elevatorsystem.common.Direction;
+
 import java.io.*;
 import java.net.*;
 import java.text.SimpleDateFormat;

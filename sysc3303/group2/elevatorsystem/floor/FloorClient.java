@@ -1,3 +1,4 @@
+package sysc3303.group2.elevatorsystem.floor;
 /*	
  * Author: Hasan Issa
  * Contributors:
@@ -6,6 +7,8 @@
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
+
+import sysc3303.group2.elevatorsystem.common.Direction;
 
 public class FloorClient {
 	private int hostPort;

@@ -1,3 +1,4 @@
+package sysc3303.group2.elevatorsystem.floor;
 /*	
  * Author: Hasan Issa
  * Contributors:
@@ -6,6 +7,10 @@
  * communicate over the network
  */
 import java.util.*;
+
+import sysc3303.group2.elevatorsystem.common.Direction;
+import sysc3303.group2.elevatorsystem.common.DirectionLamp;
+
 import java.io.*;
 import java.net.*;
 import java.text.SimpleDateFormat;

@@ -1,3 +1,6 @@
+package sysc3303.group2.elevatorsystem.floor;
+import sysc3303.group2.elevatorsystem.common.Direction;
+
 /*	
  * Author: Hasan Issa
  * Contributors:

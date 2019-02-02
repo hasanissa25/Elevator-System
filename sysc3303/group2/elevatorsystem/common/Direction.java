@@ -1,3 +1,4 @@
+package sysc3303.group2.elevatorsystem.common;
 /*	
  * Author: Hasan Issa
  * Contributors:
