@@ -2,6 +2,7 @@
  * Author: Hasan Issa
  * Contributors:
  * 
+ * This is the elevator motor that move the motor up or down 
  */
 public class ElevatorMotor {
 	

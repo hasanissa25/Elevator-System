@@ -2,6 +2,8 @@
  * Author: Hasan Issa
  * Contributors:
  * 
+ * The elevator software/controller that is responsible for 
+ * communicating over the network and processing elevator commands 
  */
 import java.net.DatagramSocket;
 

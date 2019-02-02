@@ -2,6 +2,7 @@
  * Author: Hasan Issa
  * Contributors:
  * 
+ * This is the elevator button on the inside of the car
  */
 public class ElevatorButton {
 	private int floorNumber;

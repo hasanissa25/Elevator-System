@@ -2,6 +2,8 @@
  * Author: Hasan Issa
  * Contributors:
  * 
+ * This class detects the floor that the elevator is currently 
+ * is at and sends a signal to the elevator subsystem
  */
 public class ArrivalSensor {
 

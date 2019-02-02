@@ -1,7 +1,7 @@
 /*	
  * Author: Hasan Issa
  * Contributors:
- * 
+ * This is the network client that sends the request over the network to the scheduler
  */
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;

@@ -1,6 +1,7 @@
 /*	
  * Author: Hasan Issa
  * Contributors:
+ * This is an enumerated class that represents the elevator motor state
  * 
  */
 public enum ElevatorMotorEnum {

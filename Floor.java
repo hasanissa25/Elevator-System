@@ -1,7 +1,7 @@
 /*	
  * Author: Hasan Issa
  * Contributors:
- * 
+ * This is the floor in a building
  */
 import java.util.*;
 import java.io.*;
