@@ -1,15 +1,29 @@
 /*	
  * Author: Hasan Issa
- * Contributors:
+ * Contributors: John Turner
  * 
- * This is the elevator motor that move the motor up or down 
+ * This is the elevator motor that move the motor up,  down, or idle 
  */
 public class ElevatorMotor {
 	
 	private ElevatorMotorEnum motorState;
-	public void goUp() {};
-	public void goDown() {};
-	public void stop() {}
+	
+	public ElevatorMotor() {
+		motorState = ElevatorMotorEnum.MOTOR_STATE_IDLE;
+	}
+	
+	public void goUp() {
+		motorState = ElevatorMotorEnum.MOTOR_STATE_UP;
+	};
+	
+	public void goDown() {
+		motorState = ElevatorMotorEnum.MOTOR_STATE_DOWN;
+	};
+	
+	public void stop() {
+		motorState = ElevatorMotorEnum.MOTOR_STATE_IDLE;
+	}
+	
 	public ElevatorMotorEnum getMotorState() {
 		return motorState;
 	}
