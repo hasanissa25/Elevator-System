@@ -30,7 +30,8 @@ public class Elevator {
 	
 	
 	
-	public Elevator() {
+	public Elevator(int elevatorNumber) {
+		this.elevatorNumber = elevatorNumber;
 		this.elevatorState = ElevatorState.ELEVATOR_STOP; // The elevator starts out in an IDLE state
 		this.elevatorMotor=new ElevatorMotor();
 		this.arrivalSensor=new ArrivalSensor(0); // Start the elevator on the ground floor

@@ -1,7 +1,7 @@
 package sysc3303.group2.elevatorsystem.floor;
 /*	
  * Author: Hasan Issa
- * Contributors:
+ * Contributors:John Turner
  * This is the floor in a building 
  * This represents the floor subsystem including the floor client that will
  * communicate over the network
@@ -19,27 +19,24 @@ public class Floor {
 	private int floorNumber;
 	private FloorButton floorUpButton;
 	private FloorButton floorDownButton;
-	private FloorLamp floorUpButtonLamp;
-	private FloorLamp floorDownButtonLamp;
 	private Map<Integer, DirectionLamp> floorDirectionLampsMap;
 	private FloorClient floorClient;
 	
 	
 	//to pass to floorclient with a certain hostport and a certain hostip
-	public Floor(int hostPort, String hostIp) {
+	public Floor(int floorNumber, int hostPort, String hostIp) {
+		this.floorNumber = floorNumber;
 		floorUpButton=new FloorButton(Direction.UP);
 		floorDownButton=new FloorButton(Direction.DOWN);
-		floorUpButtonLamp=new FloorLamp();
-		floorDownButtonLamp=new FloorLamp();
 		floorDirectionLampsMap = new HashMap<>();
 		floorClient= new FloorClient(hostPort, hostIp);
 	} 
+	
 	//to pass to floorclient with a default hostport and a default hostip
-	public Floor() {
+	public Floor(int floorNumber) {
+		this.floorNumber = floorNumber;
 		floorUpButton=new FloorButton(Direction.UP);
 		floorDownButton=new FloorButton(Direction.DOWN);
-		floorUpButtonLamp=new FloorLamp();
-		floorDownButtonLamp=new FloorLamp();
 		floorDirectionLampsMap = new HashMap<>();
 		floorClient= new FloorClient(5000, "127.0.0.1");
 	} 
@@ -63,45 +60,37 @@ public class Floor {
 		this.floorDownButton = floorDownButton;
 	}
 
-
-	public FloorLamp getFloorUpButtonLamp() {
-		return floorUpButtonLamp;
-	}
-
-
-	public void setFloorUpButtonLamp(FloorLamp floorUpButtonLamp) {
-		this.floorUpButtonLamp = floorUpButtonLamp;
-	}
-
-
-	public FloorLamp getFloorDownButtonLamp() {
-		return floorDownButtonLamp;
-	}
-
-
-	public void setFloorDownButtonLamp(FloorLamp floorDownButtonLamp) {
-		this.floorDownButtonLamp = floorDownButtonLamp;
-	}
-
-
 	public Map<Integer, DirectionLamp> getFloorDirectionLampsMap() {
 		return floorDirectionLampsMap;
 	}
 
 	private void handleButtonPressed(Direction direction) {
-		
+		floorClient.sendFloorButtonRequest(direction,  this.floorNumber);
 	}
-	public void pressFloorButton(Direction direction) {}
+	
+	public void pressFloorButton(Direction direction) {
+		if(direction == Direction.DOWN) {
+			handleButtonPressed(Direction.DOWN);
+			this.floorDownButton.pressButton();
+		} 
+		else if(direction == Direction.UP) {
+			handleButtonPressed(Direction.UP);
+			this.floorUpButton.pressButton();
+		}
+	}
+	
 	public boolean getFloorUpLampStatus() {
-		return false;
+		return this.floorUpButton.getButtonLamp().isLampStatus();
 	}
+	
 	public boolean getFloorDownLampStatus() {
-		return false;
+		return this.floorDownButton.getButtonLamp().isLampStatus();
 	}
 
 	public int getFloorNumber() {
 		return floorNumber;
 	}
+	
 	public void setFloorNumber(int floorNumber) {
 		this.floorNumber = floorNumber;
 	}

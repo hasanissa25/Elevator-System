@@ -28,10 +28,10 @@ public class SystemSimulation {
 		this.scheduler = new Scheduler();
 
 		for (int i = 0; i < numberOfFloors; i++) {
-			listOfFloors.add(new Floor());
+			listOfFloors.add(new Floor(i+1));
 		}
 		for (int i = 0; i < numberOfElevators; i++) {
-			listOfElevators.add(new Elevator());
+			listOfElevators.add(new Elevator(i+1));
 		}
 
 	}
