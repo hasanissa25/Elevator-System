@@ -8,6 +8,10 @@ package sysc3303.group2.elevatorsystem.floor;
 public class FloorLamp {
 	private boolean lampStatus;
 
+	public FloorLamp() {
+		this.lampStatus = false;
+	}
+	
 	public boolean isLampStatus() {
 		return lampStatus;
 	}
