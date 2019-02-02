@@ -1,6 +1,8 @@
 package sysc3303.group2.elevatorsystem.simuation;
 
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import sysc3303.group2.elevatorsystem.common.Direction;
@@ -18,22 +20,22 @@ public class SystemSimulation {
 	private int numberOfElevators;
 	private List<Floor> listOfFloors;
 	private List<Elevator> listOfElevators;
-	private Scheduler scheduler;
-
-	public SystemSimulation(int numberOfFloors, int numberOfElevators) {
+	private Thread schedulerThread;
+	
+	public SystemSimulation(int numberOfFloors, int numberOfElevators) throws SocketException {
 		this.numberOfFloors = numberOfFloors;
 		this.numberOfElevators = numberOfElevators;
 		this.listOfFloors = new ArrayList<>();
 		this.listOfElevators = new ArrayList<>();
-		this.scheduler = new Scheduler();
 
 		for (int i = 0; i < numberOfFloors; i++) {
-			listOfFloors.add(new Floor());
+			listOfFloors.add(new Floor(i+1));
 		}
 		for (int i = 0; i < numberOfElevators; i++) {
-			listOfElevators.add(new Elevator());
+			listOfElevators.add(new Elevator(i));
 		}
-
+		schedulerThread = new Thread(new Scheduler());
+		schedulerThread.start();
 	}
 
 	private void execute() {
@@ -49,13 +51,13 @@ public class SystemSimulation {
 		listOfFloors.get(floor - 1).pressFloorButton(direction);
 		// check if up button has been pressed by checking the up button floor lamp
 		if (direction == Direction.UP) {
-			if (listOfFloors.get(floor - 1).getFloorUpLampStatus()) {
+			if (listOfFloors.get(floor - 1).getFloorUpButtonLamp().isLampStatus()) {
 				print("floor up lamp is turned on");
 			} else {
 				print("floor up lamp is turned off");
 			}
 		} else {//DOWN 
-			if (listOfFloors.get(floor - 1).getFloorDownLampStatus()) {
+			if (listOfFloors.get(floor - 1).getFloorDownButtonLamp().isLampStatus()) {
 				print("floor down lamp is turned on");
 			} else {
 				print("floor down lamp is turned off");
@@ -112,20 +114,12 @@ public class SystemSimulation {
 	public void setListOfElevators(List<Elevator> listOfElevators) {
 		this.listOfElevators = listOfElevators;
 	}
-
-	public Scheduler getScheduler() {
-		return scheduler;
-	}
-
-	public void setScheduler(Scheduler scheduler) {
-		this.scheduler = scheduler;
-	}
-
+	
 	public void print(String s) {
 		System.out.println(s);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SocketException, InterruptedException {
 		int numOfFloors = 10;
 		int numOfElevators = 1;
 		System.out.println(
@@ -133,7 +127,12 @@ public class SystemSimulation {
 		SystemSimulation systemSimulation = new SystemSimulation(numOfFloors, numOfElevators);
 		System.out.println("Executing simulation: start");
 		systemSimulation.execute();
+		systemSimulation.shutdown();
 		System.out.println("Executing simulation: end");
+	}
+
+	private void shutdown() throws InterruptedException {
+		
 	}
 
 }

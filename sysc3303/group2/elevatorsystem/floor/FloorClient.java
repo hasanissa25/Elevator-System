@@ -1,4 +1,6 @@
 package sysc3303.group2.elevatorsystem.floor;
+
+import java.io.IOException;
 /*	
  * Author: Hasan Issa
  * Contributors:
@@ -6,60 +8,83 @@ package sysc3303.group2.elevatorsystem.floor;
  */
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 
 import sysc3303.group2.elevatorsystem.common.Direction;
+import sysc3303.group2.elevatorsystem.common.networking.Message;
+import sysc3303.group2.elevatorsystem.common.networking.RequestType;
 
 public class FloorClient {
+	private static final int BUFFER_SIZE = 100;
 	private int hostPort;
 	private String hostIp;
 	private DatagramPacket sendPacket;
 	private DatagramPacket receivePacket;
 	private DatagramSocket sendReceiveSocket;
-	
+
 	public FloorClient(int hostPort, String ip) {
 		this.hostPort = hostPort;
-		this.hostIp= ip;
+		this.hostIp = ip;
 		try {
-			this.sendReceiveSocket= new DatagramSocket();
+			this.sendReceiveSocket = new DatagramSocket();
 		} catch (SocketException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String getHostIp() {
 		return hostIp;
 	}
-	public void setHostIp(String hostIp) {
-		this.hostIp = hostIp;
-	}
+
 	public int getHostPort() {
 		return hostPort;
 	}
-	
-	public void setHostPort(int hostPort) {
-		this.hostPort = hostPort;
+
+	public void connectToElevator() {
 	}
-	public DatagramPacket getSendPacket() {
-		return sendPacket;
+
+	public void sendFloorButtonRequest(Direction direction, int sourceFloor) {
+		Message s = new Message();
+		s.setParameter(sourceFloor);
+		s.setRequestType(direction == Direction.UP ? RequestType.floorButtonUp : RequestType.floorButtonDown);
+		sendData(sendReceiveSocket, s);
 	}
-	public void setSendPacket(DatagramPacket sendPacket) {
-		this.sendPacket = sendPacket;
+
+	public boolean sendData(DatagramSocket s, Message m) {
+		byte data[] = m.convertToByteArray();
+		try {
+			sendPacket = new DatagramPacket(data, data.length, InetAddress.getByName(hostIp), hostPort);
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		try {
+			sendReceiveSocket.send(sendPacket);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		// wait for an acknowledge signal back
+		data = new byte[BUFFER_SIZE];
+		receivePacket = new DatagramPacket(data, data.length);
+
+		try {
+			// Block until a datagram is received via sendReceiveSocket.
+			sendReceiveSocket.receive(receivePacket);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		String received = new String(data, 0, receivePacket.getLength());
+		if (Message.ACK_MESSAGE.equals(received))
+			return true;
+		else
+			return false;
 	}
-	public DatagramPacket getReceivePacket() {
-		return receivePacket;
-	}
-	public void setReceivePacket(DatagramPacket receivePacket) {
-		this.receivePacket = receivePacket;
-	}
-	public DatagramSocket getSendReceiveSocket() {
-		return sendReceiveSocket;
-	}
-	public void setSendReceiveSocket(DatagramSocket sendReceiveSocket) {
-		this.sendReceiveSocket = sendReceiveSocket;
-	}
-	
-	public void connectToElevator() {}
-	public void sendFloorButtonRequest(Direction direction,int destinationFloor) {}
 }
