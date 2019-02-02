@@ -2,6 +2,9 @@
  * Author: Hasan Issa
  * Contributors:
  * 
+ * This is the led lamp inside the elevator button that indicates a button press 
+ * and essentially a request to visit that floor 
+ * 
  */
 public class ElevatorLamp {
 	private boolean lampStatus;

@@ -1,7 +1,7 @@
 /*	
  * Author: Hasan Issa
  * Contributors:
- * 
+ * This schedules the events and floor requests and elevator requests and ensures safety of the entire system
  */
 import java.util.*;
 import java.io.*;

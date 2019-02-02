@@ -1,7 +1,8 @@
 /*	
  * Author: Hasan Issa
  * Contributors:
- * 
+ * The networking part of the scheduler that communicates with the 
+ * elevator and the floors
  */
 import java.net.DatagramSocket;
 

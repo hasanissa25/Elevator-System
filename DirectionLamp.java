@@ -1,7 +1,8 @@
 /*	
  * Author: Hasan Issa
  * Contributors:
- * 
+ * This is the lamp that indicates the status of the elevator inside the elevator
+ * and outside the elevator on the floor 
  */
 public class DirectionLamp {
 	private Direction directionState;

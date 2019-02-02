@@ -1,7 +1,7 @@
 /*	
  * Author: Hasan Issa
  * Contributors:
- * 
+ * This is a simulation that triggers events  
  */
 public class FloorSubsystemSimulation {
 	private int numberOfFloor;

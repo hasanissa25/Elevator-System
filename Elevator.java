@@ -2,6 +2,7 @@
  * Author: Hasan Issa
  * Contributors:
  * 
+ * This is a subsystem that contains all the various elevator components and functions 
  */
 import java.util.*;
 import java.io.*;

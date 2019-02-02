@@ -1,7 +1,7 @@
 /*	
  * Author: Hasan Issa
  * Contributors:
- * 
+ * This is the button on the floor to request the elevator 
  */
 public class FloorButton {
 	private Direction direction;
