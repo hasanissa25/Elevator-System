@@ -57,6 +57,18 @@ public class Elevator {
 		// Send the request to the Scheduler
 	}
 	
+	// Elevator state setter
+	public void elevatorStateSetter(ElevatorState state) {
+		this.elevatorState = state;
+	}
+	
+	// Elevator state getter
+	public String elevatorStateGetter() {
+		String state = String.valueOf(this.elevatorState);
+		
+		return state;
+	}
+	
 	public void openDoor() {
 		this.elevatorDoor.openDoor(); // open the elevator's door
 	}
