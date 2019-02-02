@@ -34,9 +34,14 @@ public class ElevatorServer {
 	private void sendCurrentFloorNumberAndElevatorDirection(int currentFloorNumber, Direction direction) {
 		
 		byte[] message = new byte[100];
-		message[0] = (byte)currentFloorNumber;
+		byte byteCurrentFloorNumber = (byte)currentFloorNumber;
+		byte[] byteDirection = direction.name().getBytes();
 		
-		//message[1] = (byte)direction;
+		message[0] = byteCurrentFloorNumber;
+		
+		for(int i = 0; i < byteDirection.length; i++) {
+			message[i+1] = byteDirection[i];
+		}
 		
 		int messageLength = message.length;
 		
@@ -57,16 +62,40 @@ public class ElevatorServer {
 	
 	private void sendElevatorButtonRequest(int floorNumber) {
 		
+		byte[] message = new byte[100];
+		byte byteFloorNumber = (byte)floorNumber;
+		
+		message[0] = byteFloorNumber;
+		
+		int messageLength = message.length;
+		
+		try {
+			elevatorInfo = new DatagramPacket(message, messageLength, InetAddress.getLocalHost(), portNumber);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(0);
+		}
+		
+		try {
+			serverSocket.send(elevatorInfo);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
 	}
+	
 	public int getPortNumber() {
 		return portNumber;
 	}
+	
 	public void setPortNumber(int portNumber) {
 		this.portNumber = portNumber;
 	}
+	
 	public DatagramSocket getServerSocket() {
 		return serverSocket;
 	}
+	
 	public void setServerSocket(DatagramSocket serverSocket) {
 		this.serverSocket = serverSocket;
 	}
