@@ -10,18 +10,35 @@ import java.net.*;
 import java.text.SimpleDateFormat;
 
 public class Elevator {
-	private int elevatorNumber;
+	private ElevatorMotor elevatorMotor;
+	private ElevatorState elevatorState;
+	private ArrivalSensor arrivalSensor;
+	private ElevatorServer elevatorServer;
 	
 
-	public Elevator() {}
+	public Elevator() {
+		this.elevatorMotor=new ElevatorMotor();
+		this.elevatorState=ElevatorState.ELEVATOR_STOP;
+		this.arrivalSensor=new ArrivalSensor(0);
+		this.elevatorServer= new ElevatorServer();
+		
+	}
 	
 	public void turnOffElevatorLamp(int floorNumber) {}
-	public void handleElevatorButtonPressed(int floorNumber) {}
+	private void handleElevatorButtonPressed(int floorNumber) {}
 	public void openDoor() {}
 	public void closeDoor() {}
-	public void motorUp() {}
-	public void motorDown() {}
-	public void motorStop() {}
+	public void motorUp() {
+		this.elevatorMotor.goUp();
+	}
+	public void motorDown() {
+		this.elevatorMotor.goDown();
+
+	}
+	public void motorStop() {
+		this.elevatorMotor.stop();
+
+	}
 
 	public int getElevatorNumber() {
 		return elevatorNumber;
