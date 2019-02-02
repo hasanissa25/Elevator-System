@@ -5,16 +5,36 @@
  */
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.SocketException;
 
 public class FloorClient {
 	private int hostPort;
+	private String hostIp;
 	private DatagramPacket sendPacket;
 	private DatagramPacket receivePacket;
 	private DatagramSocket sendReceiveSocket;
 	
+	public FloorClient(int hostPort, String ip) {
+		this.hostPort = hostPort;
+		this.hostIp= ip;
+		try {
+			this.sendReceiveSocket= new DatagramSocket();
+		} catch (SocketException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public String getHostIp() {
+		return hostIp;
+	}
+	public void setHostIp(String hostIp) {
+		this.hostIp = hostIp;
+	}
 	public int getHostPort() {
 		return hostPort;
 	}
+	
 	public void setHostPort(int hostPort) {
 		this.hostPort = hostPort;
 	}

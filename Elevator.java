@@ -10,8 +10,11 @@ import java.net.*;
 import java.text.SimpleDateFormat;
 
 public class Elevator {
-	public Elevator() {}
+	private int elevatorNumber;
+	
 
+	public Elevator() {}
+	
 	public void turnOffElevatorLamp(int floorNumber) {}
 	public void handleElevatorButtonPressed(int floorNumber) {}
 	public void openDoor() {}
@@ -20,7 +23,13 @@ public class Elevator {
 	public void motorDown() {}
 	public void motorStop() {}
 
- 
+	public int getElevatorNumber() {
+		return elevatorNumber;
+	}
+
+	public void setElevatorNumber(int elevatorNumber) {
+		this.elevatorNumber = elevatorNumber;
+	}
  
   public static void main(String[] args) {}
 
