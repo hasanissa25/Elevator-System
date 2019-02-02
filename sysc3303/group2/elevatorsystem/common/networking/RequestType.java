@@ -6,13 +6,13 @@ import java.util.Collections;
 public enum RequestType {
 	moveMotorUp(1), moveMotorDown(2), moveMotorIdle(3), elevatorDoorOpen(4), elevatorDoorClose(5),
 	/* Parameter 1: which floor the floor button was pressed from */
-	floorButtonUp(5),
+	floorButtonUp(6),
 	/* Parameter 1: which floor the floor button was pressed from */
-	floorButtonDown(6),
+	floorButtonDown(7),
 	/* Parameter 1: which floor the elevator is at right now */
-	arrivalSensorMovingUp(7),
+	arrivalSensorMovingUp(8),
 	/* Parameter 1: which floor the elevator is at right now */
-	arrivalSensorMovingDown(8);
+	arrivalSensorMovingDown(9);
 
 	private int commandNumber;
 

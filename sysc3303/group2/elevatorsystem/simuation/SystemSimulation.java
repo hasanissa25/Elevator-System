@@ -21,6 +21,7 @@ public class SystemSimulation {
 	private List<Floor> listOfFloors;
 	private List<Elevator> listOfElevators;
 	private Thread schedulerThread;
+	private Scheduler scheduler;
 	
 	public SystemSimulation(int numberOfFloors, int numberOfElevators) throws SocketException {
 		this.numberOfFloors = numberOfFloors;
@@ -34,7 +35,9 @@ public class SystemSimulation {
 		for (int i = 0; i < numberOfElevators; i++) {
 			listOfElevators.add(new Elevator(i));
 		}
-		schedulerThread = new Thread(new Scheduler());
+		
+		scheduler = new Scheduler();
+		schedulerThread = new Thread(this.scheduler);
 		schedulerThread.start();
 	}
 
@@ -132,7 +135,6 @@ public class SystemSimulation {
 	}
 
 	private void shutdown() throws InterruptedException {
-		
 	}
 
 }
