@@ -24,7 +24,9 @@ public class SchedulerHost {
 		this.hostSocket = hostSocket;
 	}
 	
-	public void turnOffElevatorLamp(int floorNumber) {}
+	public void turnOffElevatorLamp(int floorNumber) {
+		
+	}
 	public void openDoor() {};
 	public void closeDoor() {};
 	public void motorUp() {};

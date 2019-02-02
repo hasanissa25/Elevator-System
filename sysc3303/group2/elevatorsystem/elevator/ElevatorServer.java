@@ -1,3 +1,5 @@
+package sysc3303.group2.elevatorsystem.elevator;
+
 /*	
  * Author: Hasan Issa
  * Contributors:John Turner
@@ -10,6 +12,8 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+
+import sysc3303.group2.elevatorsystem.common.Direction;
 
 public class ElevatorServer {
 
