@@ -35,8 +35,7 @@ Code
 - UML CLass Diagram
 - System Design
 - Software Code
-- Set up classes and created method placeholders 
-- Set up getters and setters
+
 
 ## George
 - Transfer UML to framework code
