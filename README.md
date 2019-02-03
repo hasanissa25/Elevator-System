@@ -40,6 +40,7 @@ Code
 
 ## George
 - Transfer UML to framework code
+- Software Code
 
 ## Komiljon
 - Google Drive
@@ -51,7 +52,7 @@ Code
     - http://bit.ly/2Siks2q
     
 
-Jack
--
+## Jack
+- Software Code
 
 
