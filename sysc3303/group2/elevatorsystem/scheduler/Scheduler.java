@@ -8,6 +8,7 @@ package sysc3303.group2.elevatorsystem.scheduler;
 import java.util.*;
 
 import sysc3303.group2.elevatorsystem.common.Direction;
+import sysc3303.group2.elevatorsystem.common.ElevatorState;
 import sysc3303.group2.elevatorsystem.common.networking.Message;
 import sysc3303.group2.elevatorsystem.common.networking.RequestType;
 
@@ -24,12 +25,17 @@ public class Scheduler implements Runnable {
 	private Map<Integer, Integer> floorAtElevatorMap;
 	private boolean isCurrentlyProcessing;
 	private Queue<ServiceRequest> serviceRequestQueue;
-
+	private Map<Integer, ServiceRequest> elevatorServiceRequestMap;
+	
 	public Scheduler() throws SocketException {
 		schedulerHost = new SchedulerHost(DEFAULT_HOST_PORT);
 		elevatorStateMap = new HashMap<>();
 		floorAtElevatorMap = new HashMap<>();
 		serviceRequestQueue = new LinkedList<ServiceRequest>();
+		elevatorServiceRequestMap = new HashMap<>();
+		
+		//TODO: remove hard code later
+		registerElevator(1);
 	}
 
 	public Scheduler(int schedulerPort) throws SocketException {
@@ -53,18 +59,11 @@ public class Scheduler implements Runnable {
 			case arrivalSensorData:
 				processArrivalSensorData(m.getParameters());
 				break;
-			case elevatorDoorClose:
-				break;
-			case elevatorDoorOpen:
-				break;
-			case moveMotorDown:
-				break;
-			case moveMotorIdle:
-				break;
-			case moveMotorUp:
-				break;
 			case registerElevator:
 				registerElevator(m.getParameters().get(0));
+				break;
+			case elevatorButtonRequest:
+				
 				break;
 			default:
 				break;
@@ -84,6 +83,9 @@ public class Scheduler implements Runnable {
 			ElevatorState elevatorState = ElevatorState.getByid(parameters.get(2));
 			elevatorStateMap.put(elevatorNumber, elevatorState);
 			floorAtElevatorMap.put(elevatorNumber, floorCurrentlyAt);
+			if(elevatorServiceRequestMap.get(1).getFloor() == floorAtElevatorMap.get(1)) {
+				schedulerHost.sendCommandToElevator(RequestType.moveMotorIdle);
+			}
 		} else {
 			System.err.println(
 					"Insufficient number of parameters passed to Scheduler for processing arrival sensor data");
@@ -93,10 +95,17 @@ public class Scheduler implements Runnable {
 	private void processFloorButtonRequest(Direction direction, int floorNumberThatPressedButton) {
 		// serviceRequestQueue.add(new ServiceRequest(direction,
 		// floorNumberThatPressedButton));
-		if (direction == Direction.UP)
+		int elevatorAt = floorAtElevatorMap.get(1);
+		
+		elevatorServiceRequestMap.put(1, new ServiceRequest(direction, floorNumberThatPressedButton));
+		
+		int temp = elevatorAt - floorNumberThatPressedButton;
+		
+		if (temp < 0)
 			schedulerHost.sendCommandToElevator(RequestType.moveMotorUp);
-		else
+		else if (temp > 0)
 			schedulerHost.sendCommandToElevator(RequestType.moveMotorDown);
+		
 	}
 
 	public static void main(String[] args) throws SocketException {

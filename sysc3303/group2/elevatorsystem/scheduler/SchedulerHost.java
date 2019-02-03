@@ -49,8 +49,8 @@ public class SchedulerHost {
 
 		int len = receivePacket.getLength();
 		// Form a String from the byte array.
-		System.out.println("Host received:");
-		Utility.printByteArray(data, len);
+		//System.out.println("Host received:");
+		//Utility.printByteArray(data, len);
 //		DatagramPacket sendReceivePacket = null;
 //		try {
 //			byte[] ackData = Message.ACK_MESSAGE.getBytes();

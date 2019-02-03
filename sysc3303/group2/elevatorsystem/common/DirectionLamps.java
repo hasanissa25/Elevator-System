@@ -5,14 +5,11 @@ package sysc3303.group2.elevatorsystem.common;
  * This is the lamp that indicates the status of the elevator inside the elevator
  * and outside the elevator on the floor 
  */
-public class DirectionLamp {
+public class DirectionLamps {
 	private Direction directionState;
 	private int currentFloorNumber;
 	
-	public DirectionLamp(Direction directionState, int currentFloorNumber) {
-		super();
-		this.directionState = directionState;
-		this.currentFloorNumber = currentFloorNumber;
+	public DirectionLamps() {
 	}
 
 	public Direction getDirectionState() {

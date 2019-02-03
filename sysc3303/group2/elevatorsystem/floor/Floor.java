@@ -7,14 +7,11 @@ package sysc3303.group2.elevatorsystem.floor;
  * This represents the floor subsystem including the floor client that will
  * communicate over the network
  */
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import sysc3303.group2.elevatorsystem.common.Direction;
-import sysc3303.group2.elevatorsystem.common.DirectionLamp;
-
-import java.io.*;
-import java.net.*;
-import java.text.SimpleDateFormat;
+import sysc3303.group2.elevatorsystem.common.DirectionLamps;
 
 public class Floor {
 	private int floorNumber;
@@ -22,7 +19,7 @@ public class Floor {
 	private FloorButton floorDownButton;
 	private FloorLamp floorUpButtonLamp;
 	private FloorLamp floorDownButtonLamp;
-	private Map<Integer, DirectionLamp> floorDirectionLampsMap;
+	private Map<Integer, DirectionLamps> floorDirectionLampsMap;
 	private FloorClient floorClient;
 
 	// to pass to floorclient with a certain hostport and a certain hostip
@@ -79,7 +76,7 @@ public class Floor {
 		this.floorDownButtonLamp = floorDownButtonLamp;
 	}
 
-	public Map<Integer, DirectionLamp> getFloorDirectionLampsMap() {
+	public Map<Integer, DirectionLamps> getFloorDirectionLampsMap() {
 		return floorDirectionLampsMap;
 	}
 

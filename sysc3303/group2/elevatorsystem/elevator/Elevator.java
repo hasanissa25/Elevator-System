@@ -1,20 +1,10 @@
 package sysc3303.group2.elevatorsystem.elevator;
 
-/*	
- * Author: Hasan Issa
- * Contributors:John Turner
- * 
- * This is a subsystem that contains all the various elevator components and functions 
- */
-import java.util.*;
-
 import sysc3303.group2.elevatorsystem.common.Direction;
-import sysc3303.group2.elevatorsystem.common.DirectionLamp;
+import sysc3303.group2.elevatorsystem.common.DirectionLamps;
+import sysc3303.group2.elevatorsystem.common.ElevatorState;
 import sysc3303.group2.elevatorsystem.common.networking.Message;
-
-import java.io.*;
-import java.net.*;
-import java.text.SimpleDateFormat;
+import sysc3303.group2.elevatorsystem.common.networking.RequestType;
 
 public class Elevator implements Runnable {
 
@@ -27,12 +17,12 @@ public class Elevator implements Runnable {
 
 	private ElevatorButton elevatorButtons[];
 	private ElevatorDoor elevatorDoor;
-	private DirectionLamp elevatorDirectionLamp[];
+	private DirectionLamps elevatorDirectionLamps;
 
 	public Elevator(int elevatorNumber) {
 		this.elevatorNumber = elevatorNumber;
 		this.elevatorMotor = new ElevatorMotor();
-		this.arrivalSensor = new ArrivalSensor(0); // Start the elevator on the ground floor
+		this.arrivalSensor = new ArrivalSensor(1, elevatorMotor, this); // Start the elevator on the ground floor
 		this.elevatorServer = new ElevatorServer(); // The elevatorNumber is used as the Port to communicate with it
 		this.elevatorDoor = new ElevatorDoor();
 
@@ -42,13 +32,9 @@ public class Elevator implements Runnable {
 			elevatorButtons[i] = new ElevatorButton(i);
 		}
 
-		this.elevatorDirectionLamp = new DirectionLamp[Direction.values().length]; // Create lamps for each direction
-		elevatorDirectionLamp[0] = new DirectionLamp(Direction.UP, arrivalSensor.getCurrentFloorAt()); // UP and DOWN
-																										// lamps are
-																										// created...
-		elevatorDirectionLamp[1] = new DirectionLamp(Direction.DOWN, arrivalSensor.getCurrentFloorAt()); // at the
-																											// current
-																											// floor
+		this.elevatorDirectionLamps = new DirectionLamps();
+		Thread t = new Thread(this.arrivalSensor);
+		t.start();
 	}
 
 	@Override
@@ -60,18 +46,26 @@ public class Elevator implements Runnable {
 			System.out.println("Elevator: (id=" + elevatorNumber + ") processing request: " + m);
 			switch (m.getRequestType()) {
 			case elevatorDoorClose:
+				System.out.println("Door closed");
 				elevatorDoor.setDoorOpen(false);
 				break;
 			case elevatorDoorOpen:
+				System.out.println("Door opened");
 				elevatorDoor.setDoorOpen(true);
 				break;
 			case moveMotorDown:
+				System.out.println("Elevator going down");
+				elevatorDirectionLamps.setDirectionState(Direction.DOWN);
 				elevatorMotor.setMotorState(ElevatorMotorEnum.MOTOR_STATE_DOWN);
 				break;
 			case moveMotorIdle:
+				System.out.println("Elevator stopped");
+				elevatorDirectionLamps.setDirectionState(null);
 				elevatorMotor.setMotorState(ElevatorMotorEnum.MOTOR_STATE_IDLE);
 				break;
 			case moveMotorUp:
+				System.out.println("Elevator going up");
+				elevatorDirectionLamps.setDirectionState(Direction.UP);
 				elevatorMotor.setMotorState(ElevatorMotorEnum.MOTOR_STATE_UP);
 				break;
 			default:
@@ -84,10 +78,11 @@ public class Elevator implements Runnable {
 		elevatorButtons[floorNumber].getButtonLamp().setLampStatus(false); // Turn off that floor's button/lamp
 	}
 
-	private void handleElevatorButtonPressed(int floorNumber) {
+	private void pressElevatorButton(int floorNumber) {
 		elevatorButtons[floorNumber].getButtonLamp().setLampStatus(true); // Turn on that floor's button/lamp
 
 		// Send the request to the Scheduler
+		elevatorServer.sendCommandToHost(RequestType.elevatorButtonRequest, floorNumber);
 	}
 
 	public int getElevatorNumber() {
@@ -101,6 +96,21 @@ public class Elevator implements Runnable {
 	public static void main(String[] args) {
 		Elevator e = new Elevator(Integer.parseInt(args[0]));
 		e.run();
+	}
+
+	public void sendArrivalData() {
+		ElevatorState computedElevatorState = null;
+		if(elevatorMotor.getMotorState() == ElevatorMotorEnum.MOTOR_STATE_IDLE)
+			if(elevatorDoor.isDoorOpen())
+				computedElevatorState = ElevatorState.ELEVATOR_DOOR_OPEN;
+			else computedElevatorState = ElevatorState.ELEVATOR_DOOR_CLOSED_AND_STOPPED;
+		else if(elevatorMotor.getMotorState() == ElevatorMotorEnum.MOTOR_STATE_UP)
+			computedElevatorState = ElevatorState.ELEVATOR_MOVING_UP;
+		else if(elevatorMotor.getMotorState() == ElevatorMotorEnum.MOTOR_STATE_DOWN)
+			computedElevatorState = ElevatorState.ELEVATOR_MOVING_DOWN;
+		
+		this.elevatorServer.sendCommandToHost(RequestType.arrivalSensorData, this.elevatorNumber, this.arrivalSensor.getCurrentFloorAt(), computedElevatorState.getId());
+		
 	}
 
 }

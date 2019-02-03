@@ -10,7 +10,8 @@ public enum RequestType {
 	/* Parameter 1: which floor the floor button was pressed from */
 	floorButtonDown(7),
 	/* Parameter 1: which floor the elevator is at right now */
-	arrivalSensorData(8), registerElevator(9);
+	arrivalSensorData(8), registerElevator(9),
+	elevatorButtonRequest(10);
 
 	private int commandNumber;
 

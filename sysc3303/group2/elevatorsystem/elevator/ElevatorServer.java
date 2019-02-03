@@ -12,10 +12,13 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.util.Arrays;
 
 import sysc3303.group2.elevatorsystem.common.Direction;
 import sysc3303.group2.elevatorsystem.common.Utility;
 import sysc3303.group2.elevatorsystem.common.networking.Message;
+import sysc3303.group2.elevatorsystem.common.networking.NetworkUtility;
+import sysc3303.group2.elevatorsystem.common.networking.RequestType;
 
 public class ElevatorServer {
 
@@ -24,9 +27,10 @@ public class ElevatorServer {
 	private DatagramSocket serverSocket;
 	private DatagramPacket elevatorInfo;
 	private int hostPort;
-	
+		private String hostIp = "127.0.0.1";
 	public ElevatorServer() {
 		this.portNumber = 5001;
+		this.hostPort = 5000;
 		
 		try {
 			serverSocket = new DatagramSocket(portNumber);  // Create a Datagram socket bound to this port
@@ -49,8 +53,8 @@ public class ElevatorServer {
 
 		int len = receivePacket.getLength();
 		// Form a String from the byte array.
-		System.out.println("Elevator received:");
-		Utility.printByteArray(data, len);
+		//System.out.println("Elevator received:");
+		//Utility.printByteArray(data, len);
 //		DatagramPacket sendReceivePacket = null;
 //		try {
 //			byte[] ackData = Message.ACK_MESSAGE.getBytes();
@@ -65,8 +69,11 @@ public class ElevatorServer {
 
 	}
 	
-	private void sendElevatorButtonRequest(int floorNumber) {
-		
+	public void sendCommandToHost(RequestType requestType, Integer... parameters) {
+		Message m = new Message();
+		m.setRequestType(requestType);
+		m.getParameters().addAll(Arrays.asList(parameters));
+		NetworkUtility.sendData(serverSocket, m, hostIp, hostPort);
 	}
 	
 	public int getPortNumber() {

@@ -1,4 +1,4 @@
-package sysc3303.group2.elevatorsystem.scheduler;
+package sysc3303.group2.elevatorsystem.common;
 
 import java.util.Arrays;
 
