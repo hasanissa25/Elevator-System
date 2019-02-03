@@ -10,15 +10,22 @@ import java.net.DatagramPacket;
  */
 import java.net.DatagramSocket;
 import java.net.SocketException;
+import java.util.Arrays;
 
 import sysc3303.group2.elevatorsystem.common.Utility;
 import sysc3303.group2.elevatorsystem.common.networking.Message;
+import sysc3303.group2.elevatorsystem.common.networking.NetworkUtility;
+import sysc3303.group2.elevatorsystem.common.networking.RequestType;
 
 public class SchedulerHost {
 	private int portNumber;
 	private DatagramSocket hostSocket;
 	private DatagramSocket sendReceiveSocket;
 	private static final int BUFFER_SIZE = 1000;
+	private int elevatorPort = 5001;
+	private String elevatorIp = "127.0.0.1";
+	private int floorPort = 5001;
+	private String floorIp = "127.0.0.1";
 
 	public SchedulerHost(int portNumber) throws SocketException {
 		super();
@@ -42,17 +49,19 @@ public class SchedulerHost {
 
 		int len = receivePacket.getLength();
 		// Form a String from the byte array.
+		System.out.println("Host received:");
 		Utility.printByteArray(data, len);
-		try {
-			byte[] ackData = Message.ACK_MESSAGE.getBytes();
-			DatagramPacket sendReceivePacket = new DatagramPacket(ackData, ackData.length, receivePacket.getAddress(),
-					receivePacket.getPort());
-
-			sendReceiveSocket.send(sendReceivePacket);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return Message.convertToMessage(data);
+//		DatagramPacket sendReceivePacket = null;
+//		try {
+//			byte[] ackData = Message.ACK_MESSAGE.getBytes();
+//			sendReceivePacket = new DatagramPacket(ackData, ackData.length, receivePacket.getAddress(),
+//					receivePacket.getPort());
+//
+//			sendReceiveSocket.send(sendReceivePacket);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		return Message.convertToMessage(data, receivePacket.getLength());
 
 	}
 
@@ -60,23 +69,18 @@ public class SchedulerHost {
 		return portNumber;
 	}
 
-	public void turnOffElevatorLamp(int floorNumber) {
-
+	public void sendCommandToElevator(RequestType requestType, Integer... parameters) {
+		Message m = new Message();
+		m.setRequestType(requestType);
+		m.getParameters().addAll(Arrays.asList(parameters));
+		NetworkUtility.sendData(sendReceiveSocket, m, elevatorIp, elevatorPort);
 	}
-
-	public void openDoor() {
-	};
-
-	public void closeDoor() {
-	};
-
-	public void motorUp() {
-	};
-
-	public void motorDown() {
-	};
-
-	public void motorStop() {
-	};
+	
+	public void sendCommandToFloor(RequestType requestType, Integer... parameters) {
+		Message m = new Message();
+		m.setRequestType(requestType);
+		m.getParameters().addAll(Arrays.asList(parameters));
+		NetworkUtility.sendData(sendReceiveSocket, m, floorIp, floorPort);
+	}
 
 }

@@ -14,15 +14,19 @@ import java.net.InetAddress;
 import java.net.SocketException;
 
 import sysc3303.group2.elevatorsystem.common.Direction;
+import sysc3303.group2.elevatorsystem.common.Utility;
+import sysc3303.group2.elevatorsystem.common.networking.Message;
 
 public class ElevatorServer {
 
+	private static final int BUFFER_SIZE = 1000;
 	private int portNumber;
 	private DatagramSocket serverSocket;
 	private DatagramPacket elevatorInfo;
+	private int hostPort;
 	
-	public ElevatorServer(int portNumber) {
-		this.portNumber = portNumber;
+	public ElevatorServer() {
+		this.portNumber = 5001;
 		
 		try {
 			serverSocket = new DatagramSocket(portNumber);  // Create a Datagram socket bound to this port
@@ -31,57 +35,38 @@ public class ElevatorServer {
 		}
 	}
 	
-	private void sendCurrentFloorNumberAndElevatorDirection(int currentFloorNumber, Direction direction) {
-		
-		byte[] message = new byte[100];
-		byte byteCurrentFloorNumber = (byte)currentFloorNumber;
-		byte[] byteDirection = direction.name().getBytes();
-		
-		message[0] = byteCurrentFloorNumber;
-		
-		for(int i = 0; i < byteDirection.length; i++) {
-			message[i+1] = byteDirection[i];
-		}
-		
-		int messageLength = message.length;
-		
+	public Message waitForANetworkRequest() {
+
+		byte data[] = new byte[BUFFER_SIZE];
+		DatagramPacket receivePacket = new DatagramPacket(data, data.length);
+
+		// Block until a datagram packet is received from receiveSocket.
 		try {
-			elevatorInfo = new DatagramPacket(message, messageLength, InetAddress.getLocalHost(), portNumber);
+			serverSocket.receive(receivePacket);
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.exit(0);
 		}
-		
-		try {
-			serverSocket.send(elevatorInfo);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
+
+		int len = receivePacket.getLength();
+		// Form a String from the byte array.
+		System.out.println("Elevator received:");
+		Utility.printByteArray(data, len);
+//		DatagramPacket sendReceivePacket = null;
+//		try {
+//			byte[] ackData = Message.ACK_MESSAGE.getBytes();
+//			sendReceivePacket = new DatagramPacket(ackData, ackData.length, receivePacket.getAddress(),
+//					receivePacket.getPort());
+//
+//			sendReceiveSocket.send(sendReceivePacket);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		return Message.convertToMessage(data, receivePacket.getLength());
+
 	}
 	
 	private void sendElevatorButtonRequest(int floorNumber) {
 		
-		byte[] message = new byte[100];
-		byte byteFloorNumber = (byte)floorNumber;
-		
-		message[0] = byteFloorNumber;
-		
-		int messageLength = message.length;
-		
-		try {
-			elevatorInfo = new DatagramPacket(message, messageLength, InetAddress.getLocalHost(), portNumber);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(0);
-		}
-		
-		try {
-			serverSocket.send(elevatorInfo);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
 	}
 	
 	public int getPortNumber() {

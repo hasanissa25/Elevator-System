@@ -15,27 +15,29 @@ public class Message {
 
 	private RequestType requestType;
 
-	/**
-	 * Designed to only have a single parameter for now
-	 */
-	private int parameter;
+	private List<Integer> parameters;
 
 	public Message() {
+		parameters = new ArrayList<>();
 	}
 
 	public byte[] convertToByteArray() {
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 		buffer.write(requestType.getCommandNumber());
-		buffer.write(parameter);
+		for(Integer parameter : parameters) {
+			buffer.write(parameter);
+		}
 		// String fileName = "random.txt";
 		// buffer.write(fileName.getBytes());
 		//buffer.write(0);
 		return buffer.toByteArray();
 	}
 
-	public static Message convertToMessage(byte[] data) {
+	public static Message convertToMessage(byte[] data, int length) {
 		Message m = new Message();
-		m.setParameter(data[1]);
+		for(int i = 1; i < length; i++) {
+			m.getParameters().add((int) data[i]);
+		}
 		m.setRequestType(RequestType.getByCommandNumber(data[0]));
 		return m;
 	}
@@ -48,12 +50,15 @@ public class Message {
 		this.requestType = requestType;
 	}
 
-	public int getParameter() {
-		return parameter;
+	public List<Integer> getParameters() {
+		return parameters;
 	}
 
-	public void setParameter(int parameter) {
-		this.parameter = parameter;
+	@Override
+	public String toString() {
+		return "Message [requestType=" + requestType + ", parameters=" + parameters + "]";
 	}
+
+
 
 }

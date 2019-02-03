@@ -14,13 +14,13 @@ import java.net.UnknownHostException;
 
 import sysc3303.group2.elevatorsystem.common.Direction;
 import sysc3303.group2.elevatorsystem.common.networking.Message;
+import sysc3303.group2.elevatorsystem.common.networking.NetworkUtility;
 import sysc3303.group2.elevatorsystem.common.networking.RequestType;
 
 public class FloorClient {
 	private static final int BUFFER_SIZE = 100;
 	private int hostPort;
 	private String hostIp;
-	private DatagramPacket sendPacket;
 	private DatagramPacket receivePacket;
 	private DatagramSocket sendReceiveSocket;
 
@@ -48,28 +48,15 @@ public class FloorClient {
 
 	public void sendFloorButtonRequest(Direction direction, int sourceFloor) {
 		Message s = new Message();
-		s.setParameter(sourceFloor);
+		s.getParameters().add(sourceFloor);
 		s.setRequestType(direction == Direction.UP ? RequestType.floorButtonUp : RequestType.floorButtonDown);
-		sendData(sendReceiveSocket, s);
+		NetworkUtility.sendData(sendReceiveSocket, s, hostIp, hostPort);
 	}
 
-	public boolean sendData(DatagramSocket s, Message m) {
-		byte data[] = m.convertToByteArray();
-		try {
-			sendPacket = new DatagramPacket(data, data.length, InetAddress.getByName(hostIp), hostPort);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-			return false;
-		}
-
-		try {
-			sendReceiveSocket.send(sendPacket);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
-		}
+	
 
 		// wait for an acknowledge signal back
+		/*
 		data = new byte[BUFFER_SIZE];
 		receivePacket = new DatagramPacket(data, data.length);
 
@@ -86,5 +73,7 @@ public class FloorClient {
 			return true;
 		else
 			return false;
-	}
+			*/
+	
+	
 }

@@ -15,11 +15,11 @@ public class ElevatorMotor {
 	
 	public void goUp() {
 		motorState = ElevatorMotorEnum.MOTOR_STATE_UP;
-	};
+	}
 	
 	public void goDown() {
 		motorState = ElevatorMotorEnum.MOTOR_STATE_DOWN;
-	};
+	}
 	
 	public void stop() {
 		motorState = ElevatorMotorEnum.MOTOR_STATE_IDLE;

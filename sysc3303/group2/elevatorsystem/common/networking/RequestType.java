@@ -10,9 +10,7 @@ public enum RequestType {
 	/* Parameter 1: which floor the floor button was pressed from */
 	floorButtonDown(7),
 	/* Parameter 1: which floor the elevator is at right now */
-	arrivalSensorMovingUp(8),
-	/* Parameter 1: which floor the elevator is at right now */
-	arrivalSensorMovingDown(9);
+	arrivalSensorData(8), registerElevator(9);
 
 	private int commandNumber;
 
@@ -29,8 +27,8 @@ public enum RequestType {
 	}
 
 	public static RequestType getByCommandNumber(int commandNumber) {
-		for(RequestType type : Arrays.asList(RequestType.values())) {
-			if(type.getCommandNumber() == commandNumber)
+		for (RequestType type : Arrays.asList(RequestType.values())) {
+			if (type.getCommandNumber() == commandNumber)
 				return type;
 		}
 		return null;

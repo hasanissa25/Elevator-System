@@ -33,7 +33,10 @@ public class SystemSimulation {
 			listOfFloors.add(new Floor(i+1));
 		}
 		for (int i = 0; i < numberOfElevators; i++) {
-			listOfElevators.add(new Elevator(i));
+			Elevator elevator = new Elevator(i);
+			Thread t = new Thread(elevator);
+			t.start();
+			listOfElevators.add(elevator);
 		}
 		
 		scheduler = new Scheduler();
@@ -44,10 +47,28 @@ public class SystemSimulation {
 	private void execute() {
 		print("simulate pressing floor button UP on floor 1");
 		simulateFloorButtonPress(1, Direction.UP);
+		try {
+			Thread.sleep(250);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		print("simulate pressing floor button Down on floor 2");
 		simulateFloorButtonPress(2, Direction.DOWN);
+		try {
+			Thread.sleep(250);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		print("simulate pressing floor button UP on floor 3");
 		simulateFloorButtonPress(3, Direction.UP);
+		try {
+			Thread.sleep(250);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void simulateFloorButtonPress(int floor, Direction direction) {
@@ -70,6 +91,7 @@ public class SystemSimulation {
 	}
 
 	public void pressFloorUp(int currentFloorNumber) {
+		
 	}
 
 	public void pressFloorDown(int currentFloorNumber) {
