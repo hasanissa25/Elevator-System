@@ -29,19 +29,19 @@ Code
 
 ## Breakdown of Responsibilities
 
-### Iteration 0 & 1
+## Iteration 0 & 1
 
-## Hasan
+### Hasan
 - UML CLass Diagram
 - System Design
 - Software Code
 
 
-## George
+### George
 - Transfer UML to framework code
 - Software Code
 
-## Komiljon
+### Komiljon
 - Google Drive
   - [x] State Machine Diagram For Elevator: 
     - http://bit.ly/2RozLSu
@@ -50,20 +50,20 @@ Code
   - [x] State Machine Diagram for Scheduler:
     - http://bit.ly/2Siks2q   
 
-## Jack
+### Jack
 - Software Code
 
-### Iteration 2
+## Iteration 2
 
-## Hasan
+### Hasan
 - Elevator System simulation
 - Elevator System scheduler
 
-## George
+### George
 - Elevator System elevator
 
-## Komiljon
+### Komiljon
 - Elevator System elevator
 
-## Jack
+### Jack
 - Elevator System elevator
