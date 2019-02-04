@@ -56,9 +56,14 @@ Code
 ### Iteration 2
 
 ## Hasan
+- Elevator System simulation
+- Elevator System scheduler
 
 ## George
+- Elevator System elevator
 
 ## Komiljon
+- Elevator System elevator
 
 ## Jack
+- Elevator System elevator
