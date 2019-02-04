@@ -6,8 +6,8 @@
 #### Jack [@JackTurner98](https://github.com/JackTurner98)
 
 ## Instructions:
-1.Extract The zipfolder into Eclipse IDE
-2.Run The Simulation
+1. Extract The zipfolder into Eclipse IDE
+2. Run The Simulation
 3. View actions in console window
 
 ## FILES:
@@ -48,10 +48,17 @@ Code
   - [x] State Machine Diagram For Floor: 
     - http://bit.ly/2Tmf1gb
   - [x] State Machine Diagram for Scheduler:
-    - http://bit.ly/2Siks2q
-    
+    - http://bit.ly/2Siks2q   
 
 ## Jack
 - Software Code
 
+### Iteration 2
 
+## Hasan
+
+## George
+
+## Komiljon
+
+## Jack
