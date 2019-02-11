@@ -101,6 +101,7 @@ The map tracks multiple elevators
 
 ### Komiljon
 - Elevator System elevator
+- ArrivalSensors
 
 ### Jack
 - Elevator System elevator
