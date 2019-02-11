@@ -58,30 +58,30 @@
 Tasks distribution: 
 
 Scheduler:
--update to allow for multiple passengers per elevator(must have the elevator request code finished first)
--Support multiple elevators : processFloorButtonRequest
--implement todo elevatorButtonRequest in the run() method 
-- implement the todo: processArrivalSensorData
+  update to allow for multiple passengers per elevator(must have the elevator request code finished first)
+  Support multiple elevators : processFloorButtonRequest
+  implement todo elevatorButtonRequest in the run() method 
+  implement the todo: processArrivalSensorData
 
-Floor: 	
--Floor button presses 
--Floor Lamp on/off
--add j-unit testing
+Floor:
+  Floor button presses
+  Floor Lamp on/off
+  Add j-unit testing
 
 Elevator:
-- send arrival sensor data to scheduler over network 
--Arrival sensor needs to stop at max floor
--ability to receive stop motor commands
--modify elevator requests to the scheduler to support 	multiple passengers
--add j unit testing
+  Send arrival sensor data to scheduler over network 
+  Arrival sensor needs to stop at max floor
+  Ability to receive stop motor commands
+  Modify elevator requests to the scheduler to support 	multiple passengers
+  Add j unit testing
 
 
 ### Hasan
--Integration testing: put the system together and test all scenarios 
--black box testing
--Simulator: set simulation environment and give access to tests as a passenger e.g pressing floor buttons,observing lamps, observing floors the elevator is at...
--j unit testing: identity all the methods needed for tests: Which floor the elevator is currently at, access elevator object and compare to what the scheduler thinks its at  
--The map tracks multiple elevators 
+Integration testing: put the system together and test all scenarios 
+black box testing
+Simulator: set simulation environment and give access to tests as a passenger e.g pressing floor buttons,observing lamps, observing floors the elevator is at...
+j unit testing: identity all the methods needed for tests: Which floor the elevator is currently at, access elevator object and compare to what the scheduler thinks its at  
+The map tracks multiple elevators 
 
 ### George
 - Elevator System elevator
