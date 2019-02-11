@@ -11,12 +11,12 @@
 3. View actions in console window
 
 ## FILES:
-ElevatorStateMachine
-FloorStateMachine
-SchedulerStateMachine
-UML
-RunInstructions
-Code
+* * ElevatorStateMachine
+* * FloorStateMachine
+* * SchedulerStateMachine
+* * UML
+* * RunInstructions
+* * Code
 
 - Google drive folder for the project: http://bit.ly/2HGr5Yl
 - UML Class Diagram: http://bit.ly/2Sip2Oa
