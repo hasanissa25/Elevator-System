@@ -65,7 +65,7 @@ public class Scheduler implements Runnable {
 				registerElevator(m.getParameters().get(0));
 				break;
 			case elevatorButtonRequest:
-
+//TODO: implement 
 				break;
 			default:
 				break;
@@ -87,6 +87,7 @@ public class Scheduler implements Runnable {
 			ElevatorState elevatorState = ElevatorState.getByid(parameters.get(2));
 			elevatorStateMap.put(elevatorNumber, elevatorState);
 			floorAtElevatorMap.put(elevatorNumber, floorCurrentlyAt);
+			//TODO: remove hard codes 
 			if (elevatorServiceRequestMap.get(1).getFloor() == floorAtElevatorMap.get(1)) {
 				schedulerHost.sendCommandToElevator(RequestType.moveMotorIdle);
 			}
@@ -110,6 +111,9 @@ public class Scheduler implements Runnable {
 			schedulerHost.sendCommandToElevator(RequestType.moveMotorUp);
 		else if (temp > 0)
 			schedulerHost.sendCommandToElevator(RequestType.moveMotorDown);
+		else { // the elevator is already at the floor
+			
+		}
 
 	}
 

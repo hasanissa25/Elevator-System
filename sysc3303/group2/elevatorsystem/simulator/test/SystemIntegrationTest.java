@@ -13,18 +13,16 @@ import sysc3303.group2.elevatorsystem.simulator.PassengerSimulator;
 public class SystemIntegrationTest {
 	private PassengerSimulator systemSimulation;
 
-	public SystemIntegrationTest() throws SocketException, UnknownHostException {
+	public SystemIntegrationTest() {
+	}
 
+	@Before
+	public void setup() throws SocketException, UnknownHostException {
 		int numOfFloors = 10;
 		int numOfElevators = 1;
 		System.out.println(
 				"Initiating system simulation with " + numOfFloors + " floors and " + numOfElevators + " elevator...");
 		PassengerSimulator systemSimulation = new PassengerSimulator(numOfFloors, numOfElevators);
-	}
-
-	@Before
-	public void setup() {
-
 	}
 
 	@After

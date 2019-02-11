@@ -46,7 +46,23 @@ public class PassengerSimulator {
 	}
 
 	private void execute() {
-		
+		print("simulate a passenger pressing floor button UP on floor 1");
+		simulateFloorButtonPress(2, Direction.UP);
+		// check if up button has been pressed by checking the up button floor lamp
+		boolean activeLampStatus = floorButtonLampActiveStatus(2, Direction.UP);
+		print("floor up lamp is " + (activeLampStatus ? "on." : "off."));
+		// Wait for elevator to reach floor 2 and the door opens
+		// Track that a passenger has entered the elevator
+		// Passenger presses a elevator button; floor 5
+		// confirm door closes
+		// elevator moves in requested direction
+		// elevator reaches destination floor
+		// door opens and passenger leaves the elevator
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void simulateFloorButtonPress(int floor, Direction direction) {
