@@ -61,12 +61,18 @@ public class ArrivalSensor implements Runnable {
 	public void goUp() {
 		if(elevator.MAX_FLOORS != this.currentFloorAt) {
 			this.currentFloorAt++;
+			if(elevator.MAX_FLOORS == this.currentFloorAt) {
+				elevatorMotor.setMotorState(ElevatorMotorEnum.MOTOR_STATE_IDLE);
+			}
 		}
 	}
 
 	public void goDown() {
 		if(1 != this.currentFloorAt) {
 			this.currentFloorAt--;
-		}	
+			if(1 == this.currentFloorAt) {
+				elevatorMotor.setMotorState(ElevatorMotorEnum.MOTOR_STATE_IDLE);
+			}
+		}
 	}
 }
