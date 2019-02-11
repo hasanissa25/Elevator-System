@@ -77,10 +77,10 @@ Elevator:
 
 
 ### Hasan
-	-Integration testing: put the system together and test all 	scenarios 
+	-Integration testing: put the system together and test all scenarios 
 	-black box testing
-	-Simulator: set simulation environment and give access to 	tests as a passenger e.g pressing floor buttons, 	observing   lamps, observing floors the elevator is at
-	-j unit testing: identity all the methods needed for tests : Which floor the elevator is 	currently at, access elevator object and compare to what the scheduler thinks its at  
+	-Simulator: set simulation environment and give access to tests as a passenger e.g pressing floor buttons, 	observing   lamps, observing floors the elevator is at
+	-j unit testing: identity all the methods needed for tests: Which floor the elevator is 	currently at, access elevator object and compare to what the scheduler thinks its at  
 	-The map tracks multiple elevators 
 
 ### George
