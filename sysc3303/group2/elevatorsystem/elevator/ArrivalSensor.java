@@ -59,10 +59,14 @@ public class ArrivalSensor implements Runnable {
 	}
 
 	public void goUp() {
-		this.currentFloorAt++;
+		if(elevator.MAX_FLOORS != this.currentFloorAt) {
+			this.currentFloorAt++;
+		}
 	}
 
 	public void goDown() {
-		this.currentFloorAt--;
+		if(1 != this.currentFloorAt) {
+			this.currentFloorAt--;
+		}	
 	}
 }
