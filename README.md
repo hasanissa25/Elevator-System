@@ -58,22 +58,35 @@
 Tasks distribution: 
 
 Scheduler:
+  
   update to allow for multiple passengers per elevator(must have the elevator request code finished first)
+  
   Support multiple elevators : processFloorButtonRequest
+  
   implement todo elevatorButtonRequest in the run() method 
+  
   implement the todo: processArrivalSensorData
 
 Floor:
+  
   Floor button presses
+  
   Floor Lamp on/off
+  
   Add j-unit testing
 
 Elevator:
+  
   Send arrival sensor data to scheduler over network 
+  
   Arrival sensor needs to stop at max floor
+  
   Ability to receive stop motor commands
+  
   Modify elevator requests to the scheduler to support 	multiple passengers
+  
   Add j unit testing
+
 
 
 ### Hasan
