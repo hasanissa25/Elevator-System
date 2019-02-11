@@ -33,7 +33,6 @@ public class FloorButton {
 	
 	public void pressButton() {
 		this.buttonLamp.setLampStatus(true);
-		
 	}
 	
 	public void clearButton() {
