@@ -1,6 +1,7 @@
-package sysc3303.group2.elevatorsystem.simuation;
+package sysc3303.group2.elevatorsystem.simulator;
 
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +16,7 @@ import sysc3303.group2.elevatorsystem.scheduler.Scheduler;
  * Contributors:
  * This is a simulation that triggers events  
  */
-public class SystemSimulation {
+public class PassengerSimulator {
 	private int numberOfFloors;
 	private int numberOfElevators;
 	private List<Floor> listOfFloors;
@@ -23,7 +24,7 @@ public class SystemSimulation {
 	private Thread schedulerThread;
 	private Scheduler scheduler;
 	
-	public SystemSimulation(int numberOfFloors, int numberOfElevators) throws SocketException {
+	public PassengerSimulator(int numberOfFloors, int numberOfElevators) throws SocketException, UnknownHostException {
 		this.numberOfFloors = numberOfFloors;
 		this.numberOfElevators = numberOfElevators;
 		this.listOfFloors = new ArrayList<>();
@@ -45,34 +46,27 @@ public class SystemSimulation {
 	}
 
 	private void execute() {
-		print("simulate pressing floor button UP on floor 1");
-		simulateFloorButtonPress(2, Direction.UP);
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 	}
 
 	public void simulateFloorButtonPress(int floor, Direction direction) {
 		listOfFloors.get(floor - 1).pressFloorButton(direction);
-		// check if up button has been pressed by checking the up button floor lamp
+	}
+
+	public boolean floorButtonLampActiveStatus(int floor, Direction direction) {
 		if (direction == Direction.UP) {
 			if (listOfFloors.get(floor - 1).getFloorUpButtonLamp().isLampStatus()) {
-				print("floor up lamp is turned on");
+				return true;
 			} else {
-				print("floor up lamp is turned off");
+				return false;
 			}
 		} else {//DOWN 
 			if (listOfFloors.get(floor - 1).getFloorDownButtonLamp().isLampStatus()) {
-				print("floor down lamp is turned on");
+				return true;
 			} else {
-				print("floor down lamp is turned off");
+				return false;
 			}
 		}
-			
 	}
 
 	public void pressFloorUp(int currentFloorNumber) {
@@ -129,12 +123,14 @@ public class SystemSimulation {
 		System.out.println(s);
 	}
 
-	public static void main(String[] args) throws SocketException, InterruptedException {
+	public static void main(String[] args) throws SocketException, InterruptedException, UnknownHostException {
+		//System.out.println(
+		//s		"P" + numOfFloors + " floors and " + numOfElevators + " elevator...");
 		int numOfFloors = 10;
 		int numOfElevators = 1;
 		System.out.println(
 				"Initiating system simulation with " + numOfFloors + " floors and " + numOfElevators + " elevator...");
-		SystemSimulation systemSimulation = new SystemSimulation(numOfFloors, numOfElevators);
+		PassengerSimulator systemSimulation = new PassengerSimulator(numOfFloors, numOfElevators);
 		System.out.println("Executing simulation: start");
 		systemSimulation.execute();
 		systemSimulation.shutdown();

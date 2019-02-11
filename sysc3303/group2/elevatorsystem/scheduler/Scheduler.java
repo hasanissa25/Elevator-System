@@ -26,25 +26,27 @@ public class Scheduler implements Runnable {
 	private boolean isCurrentlyProcessing;
 	private Queue<ServiceRequest> serviceRequestQueue;
 	private Map<Integer, ServiceRequest> elevatorServiceRequestMap;
-	
-	public Scheduler() throws SocketException {
+	private boolean terminateCommand;
+
+	public Scheduler() throws SocketException, UnknownHostException {
 		schedulerHost = new SchedulerHost(DEFAULT_HOST_PORT);
 		elevatorStateMap = new HashMap<>();
 		floorAtElevatorMap = new HashMap<>();
 		serviceRequestQueue = new LinkedList<ServiceRequest>();
 		elevatorServiceRequestMap = new HashMap<>();
-		
-		//TODO: remove hard code later
+		terminateCommand = false;
+
+		// TODO: remove hard code later
 		registerElevator(1);
 	}
 
-	public Scheduler(int schedulerPort) throws SocketException {
+	public Scheduler(int schedulerPort) throws SocketException, UnknownHostException {
 		schedulerHost = new SchedulerHost(schedulerPort);
 	}
 
 	@Override
 	public void run() {
-		while (true) {
+		while (!terminateCommand) {
 			Message m = schedulerHost.waitForANetworkRequest();
 			if (m == null)
 				continue;
@@ -63,12 +65,14 @@ public class Scheduler implements Runnable {
 				registerElevator(m.getParameters().get(0));
 				break;
 			case elevatorButtonRequest:
-				
+
 				break;
 			default:
 				break;
 			}
 		}
+
+		this.schedulerHost.shutdown();
 	}
 
 	private void registerElevator(Integer elevatorNumber) {
@@ -83,7 +87,7 @@ public class Scheduler implements Runnable {
 			ElevatorState elevatorState = ElevatorState.getByid(parameters.get(2));
 			elevatorStateMap.put(elevatorNumber, elevatorState);
 			floorAtElevatorMap.put(elevatorNumber, floorCurrentlyAt);
-			if(elevatorServiceRequestMap.get(1).getFloor() == floorAtElevatorMap.get(1)) {
+			if (elevatorServiceRequestMap.get(1).getFloor() == floorAtElevatorMap.get(1)) {
 				schedulerHost.sendCommandToElevator(RequestType.moveMotorIdle);
 			}
 		} else {
@@ -95,20 +99,21 @@ public class Scheduler implements Runnable {
 	private void processFloorButtonRequest(Direction direction, int floorNumberThatPressedButton) {
 		// serviceRequestQueue.add(new ServiceRequest(direction,
 		// floorNumberThatPressedButton));
+		//TODO: remove hard codes 
 		int elevatorAt = floorAtElevatorMap.get(1);
-		
+
 		elevatorServiceRequestMap.put(1, new ServiceRequest(direction, floorNumberThatPressedButton));
-		
+
 		int temp = elevatorAt - floorNumberThatPressedButton;
-		
+
 		if (temp < 0)
 			schedulerHost.sendCommandToElevator(RequestType.moveMotorUp);
 		else if (temp > 0)
 			schedulerHost.sendCommandToElevator(RequestType.moveMotorDown);
-		
+
 	}
 
-	public static void main(String[] args) throws SocketException {
+	public static void main(String[] args) throws SocketException, UnknownHostException {
 		Scheduler s = new Scheduler();
 		s.run();
 	}
@@ -119,6 +124,10 @@ public class Scheduler implements Runnable {
 
 	public void setCurrentlyProcessing(boolean isCurrentlyProcessing) {
 		this.isCurrentlyProcessing = isCurrentlyProcessing;
+	}
+
+	public void shutdown() {
+		this.terminateCommand = true;
 	}
 
 }

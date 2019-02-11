@@ -9,7 +9,9 @@ import java.net.DatagramPacket;
  * elevator and the floors
  */
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.Arrays;
 
 import sysc3303.group2.elevatorsystem.common.Utility;
@@ -27,10 +29,10 @@ public class SchedulerHost {
 	private int floorPort = 5001;
 	private String floorIp = "127.0.0.1";
 
-	public SchedulerHost(int portNumber) throws SocketException {
+	public SchedulerHost(int portNumber) throws SocketException, UnknownHostException {
 		super();
 		this.portNumber = portNumber;
-		this.hostSocket = new DatagramSocket(portNumber);
+		this.hostSocket = new DatagramSocket(portNumber, InetAddress.getLocalHost());
 		//this.hostSocket.setSoTimeout(250);
 		this.sendReceiveSocket = new DatagramSocket();
 	}
@@ -81,6 +83,10 @@ public class SchedulerHost {
 		m.setRequestType(requestType);
 		m.getParameters().addAll(Arrays.asList(parameters));
 		NetworkUtility.sendData(sendReceiveSocket, m, floorIp, floorPort);
+	}
+
+	public void shutdown() {
+		this.hostSocket.close();
 	}
 
 }

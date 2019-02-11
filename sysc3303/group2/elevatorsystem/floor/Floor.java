@@ -1,5 +1,7 @@
 package sysc3303.group2.elevatorsystem.floor;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 /*	
  * Author: Hasan Issa
  * Contributors:
@@ -34,14 +36,14 @@ public class Floor {
 	}
 
 	// to pass to floorclient with a default hostport and a default hostip
-	public Floor(int floorNumber) {
+	public Floor(int floorNumber) throws UnknownHostException {
 		this.floorNumber = floorNumber;
 		this.floorUpButton = new FloorButton(Direction.UP);
 		this.floorDownButton = new FloorButton(Direction.DOWN);
 		this.floorUpButtonLamp = new FloorLamp();
 		this.floorDownButtonLamp = new FloorLamp();
 		this.floorDirectionLampsMap = new HashMap<>();
-		this.floorClient = new FloorClient(5000, "127.0.0.1");
+		this.floorClient = new FloorClient(5000, InetAddress.getLocalHost().getHostName());
 	}
 
 	public FloorButton getFloorUpButton() {
