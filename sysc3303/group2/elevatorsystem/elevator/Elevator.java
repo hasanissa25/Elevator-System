@@ -82,7 +82,7 @@ public class Elevator implements Runnable {
 		elevatorButtons[floorNumber].getButtonLamp().setLampStatus(true); // Turn on that floor's button/lamp
 
 		// Send the request to the Scheduler
-		elevatorServer.sendCommandToHost(RequestType.elevatorButtonRequest, floorNumber);
+		elevatorServer.sendCommandToHost(RequestType.elevatorButtonRequest, floorNumber, this.elevatorNumber);
 	}
 
 	public int getElevatorNumber() {

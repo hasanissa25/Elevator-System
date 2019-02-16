@@ -25,7 +25,7 @@ public class Scheduler implements Runnable {
 	private Map<Integer, Integer> floorAtElevatorMap;
 	private boolean isCurrentlyProcessing;
 	private Queue<ServiceRequest> serviceRequestQueue;
-	private Map<Integer, ServiceRequest> elevatorServiceRequestMap;
+	private Map<Integer, ArrayList<ServiceRequest>> elevatorServiceRequestMap;
 	private boolean terminateCommand;
 
 	public Scheduler() throws SocketException, UnknownHostException {
@@ -65,7 +65,7 @@ public class Scheduler implements Runnable {
 				registerElevator(m.getParameters().get(0));
 				break;
 			case elevatorButtonRequest:
-//TODO: implement 
+				processElevatorButtonRequest(m.getParameters().get(0), m.getParameters().get(1));
 				break;
 			default:
 				break;
@@ -75,6 +75,12 @@ public class Scheduler implements Runnable {
 		this.schedulerHost.shutdown();
 	}
 
+	private void processElevatorButtonRequest(Integer floorNumber, int elevatorNumber) {
+		if(this.elevatorServiceRequestMap.containsKey(elevatorNumber)) {
+			this.elevatorServiceRequestMap.get(elevatorNumber).add(new ServiceRequest(Direction.IDLE, floorNumber));
+		}
+	}
+	
 	private void registerElevator(Integer elevatorNumber) {
 		elevatorStateMap.put(elevatorNumber, ElevatorState.ELEVATOR_READY);
 		floorAtElevatorMap.put(elevatorNumber, 1);
@@ -87,9 +93,11 @@ public class Scheduler implements Runnable {
 			ElevatorState elevatorState = ElevatorState.getByid(parameters.get(2));
 			elevatorStateMap.put(elevatorNumber, elevatorState);
 			floorAtElevatorMap.put(elevatorNumber, floorCurrentlyAt);
-			//TODO: remove hard codes 
-			if (elevatorServiceRequestMap.get(1).getFloor() == floorAtElevatorMap.get(1)) {
-				schedulerHost.sendCommandToElevator(RequestType.moveMotorIdle);
+			
+			for(ServiceRequest request:elevatorServiceRequestMap.get(elevatorNumber)) {
+				if(request.getFloor() == floorAtElevatorMap.get(elevatorNumber)) {
+					schedulerHost.sendCommandToElevator(RequestType.moveMotorIdle);
+				}
 			}
 		} else {
 			System.err.println(
@@ -101,20 +109,69 @@ public class Scheduler implements Runnable {
 		// serviceRequestQueue.add(new ServiceRequest(direction,
 		// floorNumberThatPressedButton));
 		//TODO: remove hard codes 
-		int elevatorAt = floorAtElevatorMap.get(1);
+		
+		int bestElevator = findBestElevator( direction,  floorNumberThatPressedButton);
+		
+		int elevatorAt = floorAtElevatorMap.get(bestElevator);
 
-		elevatorServiceRequestMap.put(1, new ServiceRequest(direction, floorNumberThatPressedButton));
+		elevatorServiceRequestMap.get(bestElevator).add(new ServiceRequest(direction, floorNumberThatPressedButton));
 
-		int temp = elevatorAt - floorNumberThatPressedButton;
-
-		if (temp < 0)
-			schedulerHost.sendCommandToElevator(RequestType.moveMotorUp);
-		else if (temp > 0)
-			schedulerHost.sendCommandToElevator(RequestType.moveMotorDown);
-		else { // the elevator is already at the floor
-			
+		
+	
+		if(elevatorStateMap.get(bestElevator) == ElevatorState.ELEVATOR_READY) {
+			int temp = elevatorAt - floorNumberThatPressedButton;
+			if (temp < 0)
+				schedulerHost.sendCommandToElevator(RequestType.moveMotorUp);
+			else if (temp > 0)
+				schedulerHost.sendCommandToElevator(RequestType.moveMotorDown);
+			else { // the elevator is already at the floor
+				
+			}
 		}
 
+	}
+
+	private int findBestElevator(Direction direction, int floorNumber) {
+		int distance = -1;
+		int eleNumber = -1;
+		for(Map.Entry<Integer, ElevatorState> stateEntry:this.elevatorStateMap.entrySet()) { // If there are any elevators heading in that direction add a stop to the closest
+			if(stateEntry.getValue().getId() == direction.getId()) {
+				int currDist = Math.abs(floorNumber - this.floorAtElevatorMap.get(stateEntry.getKey()));
+				if(distance == -1 || currDist < distance) {
+					distance = currDist;
+					eleNumber = stateEntry.getKey();
+				}
+			}
+		}
+		
+		if(eleNumber == -1) {
+			for(Map.Entry<Integer, ElevatorState> stateEntry:this.elevatorStateMap.entrySet()) { // If other elevators are moving in the wrong direction get the closest idle one
+				if(stateEntry.getValue().getId() == Direction.IDLE.getId()) {
+					int currDist = Math.abs(floorNumber - this.floorAtElevatorMap.get(stateEntry.getKey()));
+					if(distance == -1 || currDist < distance) {
+						distance = currDist;
+						eleNumber = stateEntry.getKey();
+					}
+				}
+			}
+		}
+		
+		if(eleNumber == -1) {
+			eleNumber = getLeastRequested();
+		}
+		return eleNumber;
+	}
+
+	private int getLeastRequested() {
+		int min = -1;
+		int eleNumber = -1;
+		for(Map.Entry<Integer, ArrayList<ServiceRequest>> requestEntry:this.elevatorServiceRequestMap.entrySet()) {
+			if(requestEntry.getValue().size() < min || min == -1) {
+				min = requestEntry.getValue().size();
+				eleNumber = requestEntry.getKey();
+			}
+		}
+		return eleNumber;
 	}
 
 	public static void main(String[] args) throws SocketException, UnknownHostException {
