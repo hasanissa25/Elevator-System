@@ -26,6 +26,13 @@ public class SchedulerTest {
 		this.scheduler = new Scheduler(TEST_PORT);
 		this.schedulerThread = new Thread(this.scheduler, "TestSchedulerThread");
 		this.schedulerThread.start();
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
 	}
 	
 	@After
@@ -43,6 +50,7 @@ public class SchedulerTest {
 		//m.setCurrentFloorOn()
 		message.setRequestType(RequestType.floorButtonUp);
 		NetworkUtility.sendData(s, message, InetAddress.getLocalHost().getHostAddress(), TEST_PORT);
+		
 		
 	}
 	
