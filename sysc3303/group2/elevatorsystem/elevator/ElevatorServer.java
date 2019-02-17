@@ -35,7 +35,7 @@ public class ElevatorServer {
 		try {
 			serverSocket = new DatagramSocket(portNumber);  // Create a Datagram socket bound to this port
 		} catch (SocketException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	
@@ -48,7 +48,7 @@ public class ElevatorServer {
 		try {
 			serverSocket.receive(receivePacket);
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 		int len = receivePacket.getLength();

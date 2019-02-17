@@ -46,7 +46,7 @@ public class SchedulerHost {
 		try {
 			hostSocket.receive(receivePacket);
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 		int len = receivePacket.getLength();

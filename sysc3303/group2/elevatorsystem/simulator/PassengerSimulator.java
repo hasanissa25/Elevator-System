@@ -153,7 +153,10 @@ public class PassengerSimulator {
 		System.out.println("Executing simulation: end");
 	}
 
-	private void shutdown() throws InterruptedException {
+	public void shutdown() throws InterruptedException {
+		this.scheduler.shutdown();
+		this.schedulerThread.join();
+		
 	}
 
 }
