@@ -1,11 +1,19 @@
 package sysc3303.group2.elevatorsystem.simulator;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringTokenizer;
 
+import javafx.util.converter.LocalTimeStringConverter;
 import sysc3303.group2.elevatorsystem.common.Direction;
 import sysc3303.group2.elevatorsystem.elevator.Elevator;
 import sysc3303.group2.elevatorsystem.floor.Floor;
@@ -23,7 +31,7 @@ public class PassengerSimulator {
 	private List<Elevator> listOfElevators;
 	private Thread schedulerThread;
 	private Scheduler scheduler;
-	
+
 	public PassengerSimulator(int numberOfFloors, int numberOfElevators) throws SocketException, UnknownHostException {
 		this.numberOfFloors = numberOfFloors;
 		this.numberOfElevators = numberOfElevators;
@@ -31,25 +39,54 @@ public class PassengerSimulator {
 		this.listOfElevators = new ArrayList<>();
 
 		for (int i = 0; i < numberOfFloors; i++) {
-			listOfFloors.add(new Floor(i+1));
+			listOfFloors.add(new Floor(i + 1));
 		}
 		for (int i = 0; i < numberOfElevators; i++) {
-			Elevator elevator = new Elevator(i+1);
+			Elevator elevator = new Elevator(i + 1);
 			Thread t = new Thread(elevator);
 			t.start();
 			listOfElevators.add(elevator);
 		}
-		
+
 		scheduler = new Scheduler();
 		schedulerThread = new Thread(this.scheduler);
 		schedulerThread.start();
 	}
 
-	private void execute() {
-		print("simulate a passenger pressing floor button UP on floor 1");
-		simulateFloorButtonPress(2, Direction.UP);
+	private void execute() throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader("input.txt"));
+		String line = reader.readLine();
+		print("Reading Simulation File; Input.txt");
+
+		List<SimulationEvent> simulationEvents = new ArrayList<>();
+		
+		while (line != null) {
+			StringTokenizer st = new StringTokenizer(line, " ");
+			String time = st.nextToken();
+			String requestingFloor = st.nextToken();
+			String direction = st.nextToken();
+			String destinationFloor = st.nextToken();
+			LocalTime localTime = LocalTime.parse(time);
+			Direction direction2 = direction.equals("UP") ? Direction.UP : Direction.DOWN;
+			int destinationFloor2 = Integer.parseInt(destinationFloor);
+			int requestingFloor2 = Integer.parseInt(requestingFloor);
+
+			SimulationEvent se = new SimulationEvent(localTime, requestingFloor2, direction2, destinationFloor2);
+			simulationEvents.add(se);
+			// read next line
+			line = reader.readLine();
+		}
+		reader.close();
+		
+		for(SimulationEvent e: simulationEvents) {
+			print("Simulate a passenger pressing floor button " + e.getDirection()+" on floor "+ e.getRequestingFloor());
+			simulateFloorButtonPress(e.getRequestingFloor(), e.getDirection());
+
+		}
+
 		// check if up button has been pressed by checking the up button floor lamp
 		boolean activeLampStatus = floorButtonLampActiveStatus(2, Direction.UP);
+
 		print("floor up lamp is " + (activeLampStatus ? "on." : "off."));
 		// Wait for elevator to reach floor 2 and the door opens
 		// Track that a passenger has entered the elevator
@@ -76,7 +113,7 @@ public class PassengerSimulator {
 			} else {
 				return false;
 			}
-		} else {//DOWN 
+		} else {// DOWN
 			if (listOfFloors.get(floor - 1).getFloorDownButtonLamp().isLampStatus()) {
 				return true;
 			} else {
@@ -86,7 +123,7 @@ public class PassengerSimulator {
 	}
 
 	public void pressFloorUp(int currentFloorNumber) {
-		
+
 	}
 
 	public void pressFloorDown(int currentFloorNumber) {
@@ -134,14 +171,14 @@ public class PassengerSimulator {
 	public void setListOfElevators(List<Elevator> listOfElevators) {
 		this.listOfElevators = listOfElevators;
 	}
-	
+
 	public void print(String s) {
 		System.out.println(s);
 	}
 
-	public static void main(String[] args) throws SocketException, InterruptedException, UnknownHostException {
-		//System.out.println(
-		//s		"P" + numOfFloors + " floors and " + numOfElevators + " elevator...");
+	public static void main(String[] args) throws InterruptedException, IOException {
+		// System.out.println(
+		// s "P" + numOfFloors + " floors and " + numOfElevators + " elevator...");
 		int numOfFloors = 10;
 		int numOfElevators = 1;
 		System.out.println(
@@ -156,7 +193,9 @@ public class PassengerSimulator {
 	public void shutdown() throws InterruptedException {
 		this.scheduler.shutdown();
 		this.schedulerThread.join();
-		
+//		for(Elevator e : listOfElevators) {
+//			e.shutdown();
+//		}
 	}
 
 }
