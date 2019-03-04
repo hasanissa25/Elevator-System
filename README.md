@@ -63,12 +63,6 @@
 - The map tracks multiple elevators 
 
 ### George
-Floor:
-  - Floor button presses
-  - Floor Lamp on/off
-  - Add j-unit testing
-
-### Komiljon
 Elevator:
   - Send arrival sensor data to scheduler over network 
   - Arrival sensor needs to stop at max floor
@@ -82,3 +76,11 @@ Scheduler:
   - Support multiple elevators : processFloorButtonRequest
   - implement todo elevatorButtonRequest in the run() method 
   - implement the todo: processArrivalSensorData
+  
+## Iteration 3
+
+### Hasan
+
+### George
+
+### Jack
