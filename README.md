@@ -4,19 +4,54 @@
 #### George [@george-carleton](https://github.com/george-carleton)
 #### Jack [@JackTurner98](https://github.com/JackTurner98)
 
-## Instructions:
+## INSTRUCTIONS:
 1. git pull the repository above
 2. Extract the repo zip folder into Eclipse IDE
-2. Run the PassengerSimulator.java located in sysc3303->group2->elevatorsystem->simulator->PassengerSimulator.java
-3. View actions in console window
+3. Run the PassengerSimulator.java located in:
+- sysc3303 -> group2 -> elevatorsystem -> simulator -> PassengerSimulator.java
+4. View actions in console window
 
 ## FILES:
-* * ElevatorStateMachine
-* * FloorStateMachine
-* * SchedulerStateMachine
-* * UML
-* * RunInstructions
-* * Code
+common:
+- networking
+  * Message.java
+  * NetworkUtility.java
+  * RequestType.java
+* Direction.java
+* DirectionLamps.java
+* ElevatorState.java
+* Utility.java
+
+elevator:
+* ArrivalSensor.java
+* Elevator.java
+* ElevatorButton.java
+* ElevatorDoor.java
+* ElevatorLamp.java
+* ElevatorMotor.java
+* ElevatorMotorEnum.java
+* ElevatorServer.java
+
+floor:
+* Floor.java
+* FloorButton.java
+* FloorClient.java
+* FloorLamp.java
+
+scheduler:
+- test
+  * SchedulerTest.java
+* Scheduler.java
+* SchedulerHost.java
+* ServiceRequest.java
+
+simulator:
+- test
+  * SystemIntegrationTest.java
+* PassengerSimulator.java
+* SimulationEvent.java
+
+## RESOURCES:
 
 - Google drive folder for the project: http://bit.ly/2HGr5Yl
 - UML Class Diagram: http://bit.ly/2Sip2Oa
