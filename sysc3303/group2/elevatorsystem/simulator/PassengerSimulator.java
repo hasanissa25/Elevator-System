@@ -80,11 +80,11 @@ public class PassengerSimulator {
 
 		for (SimulationEvent e : simulationEvents) {
 			print("Simulate a passenger pressing floor button " + e.getDirection() + " on floor "
-					+ e.getRequestingFloor());
+					+ e.getRequestingFloor()+ " then requesting to go to floor "+e.getDestinationFloor());
 			simulateFloorButtonPress(e.getRequestingFloor(), e.getDirection());
 			boolean activeLampStatus = floorButtonLampActiveStatus(e.getRequestingFloor(), e.getDirection());
 
-			print("Floor " +e.getDirection()+ " lamp is " + (activeLampStatus ? "On." : "Off."));
+			print("Floor " +e.getDirection()+ " lamp on floor "+e.getRequestingFloor() + (activeLampStatus ? " is On." : " is Off."));
 		}
 		
 		// Wait for elevator to reach floor 2 and the door opens
@@ -185,7 +185,7 @@ public class PassengerSimulator {
 		PassengerSimulator systemSimulation = new PassengerSimulator(numOfFloors, numOfElevators);
 		System.out.println("Executing simulation: Start");
 		systemSimulation.execute();
-		systemSimulation.shutdown();
+		//systemSimulation.shutdown();
 		System.out.println("Executing simulation: End");
 	}
 
