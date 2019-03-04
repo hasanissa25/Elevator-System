@@ -5,8 +5,9 @@
 #### Jack [@JackTurner98](https://github.com/JackTurner98)
 
 ## Instructions:
-1. Extract The zipfolder into Eclipse IDE
-2. Run The Simulation
+1. git pull the repository above
+2. Extract the repo zip folder into Eclipse IDE
+2. Run the PassengerSimulator.java located in sysc3303->group2->elevatorsystem->simulator->PassengerSimulator.java
 3. View actions in console window
 
 ## FILES:
@@ -21,10 +22,7 @@
 - UML Class Diagram: http://bit.ly/2Sip2Oa
 - State Machine Diagram Elevator: http://bit.ly/2RozLSu
 - State Machine Diagram Floor: http://bit.ly/2Tmf1gb
-- State machine diagram for the scheduler and elevator subsystems
-- “README.txt” file explaining the names of your files, set up instructions, etc. 
-- Detailed set up and test instructions, including test files used
-
+- State Machine Diagram for Scheduler: http://bit.ly/2Siks2q
 
 ## Breakdown of Responsibilities
 
@@ -35,17 +33,10 @@
 - System Design
 - Software Code
 
-
 ### George
 - Transfer UML to framework code
 - Software Code
-- Google Drive
-  - State Machine Diagram For Elevator: 
-    - http://bit.ly/2RozLSu
-  - State Machine Diagram For Floor: 
-    - http://bit.ly/2Tmf1gb
-  - State Machine Diagram for Scheduler:
-    - http://bit.ly/2Siks2q   
+- State Machine Diagrams
 
 ### Jack
 - Software Code
@@ -62,9 +53,9 @@
 ### George
 Elevator:
   - Send arrival sensor data to scheduler over network 
-  - Arrival sensor needs to stop at max floor
+  - Arrival sensor stopping at max floor
   - Ability to receive stop motor commands
-  - Modify elevator requests to the scheduler to support 	multiple passengers
+  - Modify elevator requests to the scheduler to support multiple passengers
   - Add j unit testing
 
 ### Jack
@@ -75,6 +66,21 @@ Scheduler:
   - implement the todo: processArrivalSensorData
   
 ## Iteration 3
+
+For this iteration, you will be adding code for detecting and handling faults. To this end, you will have to add
+timing events so that if the timer goes off before an elevator reaches a floor, then your system should assume a
+fault (either, the elevator is stuck between floors, or the arrival sensor at a floor has failed). Similarly, you
+should detect whether a door opens or not, or is stuck open. In iteration 5 below, your elevator status output
+should show these faults. A door which has not closed should be regarded as a transient fault, so your system
+should be able to handle this situation gracefully. However, the floor timer fault should be regarded as a hard
+fault and should shut down the corresponding elevator.
+
+You must submit code to enable us to see that your elevator scheduler can deal properly with the faults shown
+above (i.e., you must be able to inject these faults into the system). I suggest that you inject these faults using the
+input file (so you will have to modify its format and be able to show to us how it works). 
+
+- Any unchanged diagrams from the previous iterations UML class diagram
+- Timing diagrams showing the error scenarios for this iteration
 
 ### Hasan
 
