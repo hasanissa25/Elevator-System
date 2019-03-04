@@ -2,7 +2,6 @@
 
 #### Hasan [@hasanissa25](https://github.com/hasanissa25)
 #### George [@george-carleton](https://github.com/george-carleton)
-#### Komiljon [@komiljon27](https://github.com/komiljon27)
 #### Jack [@JackTurner98](https://github.com/JackTurner98)
 
 ## Instructions:
@@ -40,14 +39,12 @@
 ### George
 - Transfer UML to framework code
 - Software Code
-
-### Komiljon
 - Google Drive
-  - [x] State Machine Diagram For Elevator: 
+  - State Machine Diagram For Elevator: 
     - http://bit.ly/2RozLSu
-  - [x] State Machine Diagram For Floor: 
+  - State Machine Diagram For Floor: 
     - http://bit.ly/2Tmf1gb
-  - [x] State Machine Diagram for Scheduler:
+  - State Machine Diagram for Scheduler:
     - http://bit.ly/2Siks2q   
 
 ### Jack
