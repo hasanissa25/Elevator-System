@@ -71,11 +71,11 @@ public class SchedulerHost {
 		return portNumber;
 	}
 
-	public void sendCommandToElevator(RequestType requestType, Integer... parameters) {
+	public void sendCommandToElevator(int elevatorNumber, RequestType requestType, Integer... parameters) {
 		Message m = new Message();
 		m.setRequestType(requestType);
 		m.getParameters().addAll(Arrays.asList(parameters));
-		NetworkUtility.sendData(sendReceiveSocket, m, elevatorIp, elevatorPort);
+		NetworkUtility.sendData(sendReceiveSocket, m, elevatorIp, 6000+elevatorNumber);
 	}
 	
 	public void sendCommandToFloor(RequestType requestType, Integer... parameters) {

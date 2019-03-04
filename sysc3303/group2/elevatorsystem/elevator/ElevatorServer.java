@@ -35,7 +35,17 @@ public class ElevatorServer {
 		try {
 			serverSocket = new DatagramSocket(portNumber);  // Create a Datagram socket bound to this port
 		} catch (SocketException e) {
-			//e.printStackTrace();
+			e.printStackTrace();
+		}
+	}
+	public ElevatorServer(int n) {
+		this.portNumber = n;
+		this.hostPort = 5000;
+		
+		try {
+			serverSocket = new DatagramSocket(portNumber);  // Create a Datagram socket bound to this port
+		} catch (SocketException e) {
+			e.printStackTrace();
 		}
 	}
 	

@@ -42,7 +42,7 @@ public class PassengerSimulator {
 			listOfFloors.add(new Floor(i + 1));
 		}
 		for (int i = 0; i < numberOfElevators; i++) {
-			Elevator elevator = new Elevator(i + 1);
+			Elevator elevator = new Elevator(i + 1, 6000 + i);
 			Thread t = new Thread(elevator);
 			t.start();
 			listOfElevators.add(elevator);
@@ -59,7 +59,7 @@ public class PassengerSimulator {
 		print("Reading Simulation File; Input.txt");
 
 		List<SimulationEvent> simulationEvents = new ArrayList<>();
-		
+
 		while (line != null) {
 			StringTokenizer st = new StringTokenizer(line, " ");
 			String time = st.nextToken();
@@ -77,17 +77,16 @@ public class PassengerSimulator {
 			line = reader.readLine();
 		}
 		reader.close();
-		
-		for(SimulationEvent e: simulationEvents) {
-			print("Simulate a passenger pressing floor button " + e.getDirection()+" on floor "+ e.getRequestingFloor());
+
+		for (SimulationEvent e : simulationEvents) {
+			print("Simulate a passenger pressing floor button " + e.getDirection() + " on floor "
+					+ e.getRequestingFloor());
 			simulateFloorButtonPress(e.getRequestingFloor(), e.getDirection());
+			boolean activeLampStatus = floorButtonLampActiveStatus(e.getRequestingFloor(), e.getDirection());
 
+			print("Floor " +e.getDirection()+ " lamp is " + (activeLampStatus ? "On." : "Off."));
 		}
-
-		// check if up button has been pressed by checking the up button floor lamp
-		boolean activeLampStatus = floorButtonLampActiveStatus(2, Direction.UP);
-
-		print("floor up lamp is " + (activeLampStatus ? "on." : "off."));
+		
 		// Wait for elevator to reach floor 2 and the door opens
 		// Track that a passenger has entered the elevator
 		// Passenger presses a elevator button; floor 5
@@ -180,14 +179,14 @@ public class PassengerSimulator {
 		// System.out.println(
 		// s "P" + numOfFloors + " floors and " + numOfElevators + " elevator...");
 		int numOfFloors = 10;
-		int numOfElevators = 1;
+		int numOfElevators = 2;
 		System.out.println(
 				"Initiating system simulation with " + numOfFloors + " floors and " + numOfElevators + " elevator...");
 		PassengerSimulator systemSimulation = new PassengerSimulator(numOfFloors, numOfElevators);
-		System.out.println("Executing simulation: start");
+		System.out.println("Executing simulation: Start");
 		systemSimulation.execute();
 		systemSimulation.shutdown();
-		System.out.println("Executing simulation: end");
+		System.out.println("Executing simulation: End");
 	}
 
 	public void shutdown() throws InterruptedException {

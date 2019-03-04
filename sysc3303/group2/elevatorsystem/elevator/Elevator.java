@@ -19,11 +19,11 @@ public class Elevator implements Runnable {
 	private ElevatorDoor elevatorDoor;
 	private DirectionLamps elevatorDirectionLamps;
 
-	public Elevator(int elevatorNumber) {
+	public Elevator(int elevatorNumber, int portNumber) {
 		this.elevatorNumber = elevatorNumber;
 		this.elevatorMotor = new ElevatorMotor();
 		this.arrivalSensor = new ArrivalSensor(1, elevatorMotor, this); // Start the elevator on the ground floor
-		this.elevatorServer = new ElevatorServer(); // The elevatorNumber is used as the Port to communicate with it
+		this.elevatorServer = new ElevatorServer(portNumber); // The elevatorNumber is used as the Port to communicate with it
 		this.elevatorDoor = new ElevatorDoor();
 
 		this.elevatorButtons = new ElevatorButton[MAX_FLOORS]; // Create buttons for each floor of the building
@@ -43,7 +43,7 @@ public class Elevator implements Runnable {
 			Message m = elevatorServer.waitForANetworkRequest();
 			if (m == null)
 				continue;
-			System.out.println("Elevator: (id=" + elevatorNumber + ") processing request: " + m);
+			System.out.println("Elevator: #" + elevatorNumber + " processing request: " + m);
 			switch (m.getRequestType()) {
 			case elevatorDoorClose:
 				System.out.println("Door closed");
@@ -94,7 +94,7 @@ public class Elevator implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		Elevator e = new Elevator(Integer.parseInt(args[0]));
+		Elevator e = new Elevator(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
 		e.run();
 	}
 

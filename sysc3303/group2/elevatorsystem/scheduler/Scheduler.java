@@ -72,8 +72,7 @@ public class Scheduler implements Runnable {
 				break;
 			}
 			} catch (RuntimeException e) {
-				//do nothing for now
-				//e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 
@@ -89,6 +88,8 @@ public class Scheduler implements Runnable {
 	private void registerElevator(Integer elevatorNumber) {
 		elevatorStateMap.put(elevatorNumber, ElevatorState.ELEVATOR_READY);
 		floorAtElevatorMap.put(elevatorNumber, 1);
+		elevatorServiceRequestMap.put(elevatorNumber, new ArrayList<>());
+		
 	}
 
 	private void processArrivalSensorData(List<Integer> parameters) {
@@ -101,7 +102,7 @@ public class Scheduler implements Runnable {
 			
 			for(ServiceRequest request:elevatorServiceRequestMap.get(elevatorNumber)) {
 				if(request.getFloor() == floorAtElevatorMap.get(elevatorNumber)) {
-					schedulerHost.sendCommandToElevator(RequestType.moveMotorIdle);
+					schedulerHost.sendCommandToElevator(elevatorNumber,RequestType.moveMotorIdle);
 				}
 			}
 		} else {
@@ -126,9 +127,9 @@ public class Scheduler implements Runnable {
 		if(elevatorStateMap.get(bestElevator) == ElevatorState.ELEVATOR_READY) {
 			int temp = elevatorAt - floorNumberThatPressedButton;
 			if (temp < 0)
-				schedulerHost.sendCommandToElevator(RequestType.moveMotorUp);
+				schedulerHost.sendCommandToElevator(bestElevator, RequestType.moveMotorUp);
 			else if (temp > 0)
-				schedulerHost.sendCommandToElevator(RequestType.moveMotorDown);
+				schedulerHost.sendCommandToElevator(bestElevator, RequestType.moveMotorDown);
 			else { // the elevator is already at the floor
 				
 			}
