@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import javafx.util.converter.LocalTimeStringConverter;
+//import javafx.util.converter.LocalTimeStringConverter;
 import sysc3303.group2.elevatorsystem.common.Direction;
 import sysc3303.group2.elevatorsystem.elevator.Elevator;
 import sysc3303.group2.elevatorsystem.floor.Floor;
@@ -37,68 +37,72 @@ public class PassengerSimulator {
 		this.numberOfElevators = numberOfElevators;
 		this.listOfFloors = new ArrayList<>();
 		this.listOfElevators = new ArrayList<>();
+		this.scheduler = new Scheduler();
 
 		for (int i = 0; i < numberOfFloors; i++) {
 			listOfFloors.add(new Floor(i + 1));
 		}
 		for (int i = 0; i < numberOfElevators; i++) {
-			Elevator elevator = new Elevator(i + 1, 6000 + i);
+			int id = i + 1;
+			Elevator elevator = new Elevator(id, 9000 + id);
 			Thread t = new Thread(elevator);
 			t.start();
 			listOfElevators.add(elevator);
 		}
 
-		scheduler = new Scheduler();
 		schedulerThread = new Thread(this.scheduler);
 		schedulerThread.start();
 	}
 
 	private void execute() throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader("input.txt"));
-		String line = reader.readLine();
-		print("Reading Simulation File; Input.txt");
 
-		List<SimulationEvent> simulationEvents = new ArrayList<>();
+			BufferedReader reader = new BufferedReader(new FileReader("input.txt"));
+			String line = reader.readLine();
+			print("Reading Simulation File; Input.txt");
 
-		while (line != null) {
-			StringTokenizer st = new StringTokenizer(line, " ");
-			String time = st.nextToken();
-			String requestingFloor = st.nextToken();
-			String direction = st.nextToken();
-			String destinationFloor = st.nextToken();
-			LocalTime localTime = LocalTime.parse(time);
-			Direction direction2 = direction.equals("UP") ? Direction.UP : Direction.DOWN;
-			int destinationFloor2 = Integer.parseInt(destinationFloor);
-			int requestingFloor2 = Integer.parseInt(requestingFloor);
+			List<SimulationEvent> simulationEvents = new ArrayList<>();
 
-			SimulationEvent se = new SimulationEvent(localTime, requestingFloor2, direction2, destinationFloor2);
-			simulationEvents.add(se);
-			// read next line
-			line = reader.readLine();
-		}
-		reader.close();
+			while (line != null) {
+				StringTokenizer st = new StringTokenizer(line, " ");
+				String time = st.nextToken();
+				String requestingFloor = st.nextToken();
+				String direction = st.nextToken();
+				String destinationFloor = st.nextToken();
+				LocalTime localTime = LocalTime.parse(time);
+				Direction direction2 = direction.equals("UP") ? Direction.UP : Direction.DOWN;
+				int destinationFloor2 = Integer.parseInt(destinationFloor);
+				int requestingFloor2 = Integer.parseInt(requestingFloor);
 
-		for (SimulationEvent e : simulationEvents) {
-			print("Simulate a passenger pressing floor button " + e.getDirection() + " on floor "
-					+ e.getRequestingFloor()+ " then requesting to go to floor "+e.getDestinationFloor());
-			simulateFloorButtonPress(e.getRequestingFloor(), e.getDirection());
-			boolean activeLampStatus = floorButtonLampActiveStatus(e.getRequestingFloor(), e.getDirection());
+				SimulationEvent se = new SimulationEvent(localTime, requestingFloor2, direction2, destinationFloor2);
+				simulationEvents.add(se);
+				// read next line
+				line = reader.readLine();
+			}
+			reader.close();
 
-			print("Floor " +e.getDirection()+ " lamp on floor "+e.getRequestingFloor() + (activeLampStatus ? " is On." : " is Off."));
-		}
-		
-		// Wait for elevator to reach floor 2 and the door opens
-		// Track that a passenger has entered the elevator
-		// Passenger presses a elevator button; floor 5
-		// confirm door closes
-		// elevator moves in requested direction
-		// elevator reaches destination floor
-		// door opens and passenger leaves the elevator
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+			for (SimulationEvent e : simulationEvents) {
+				print("Simulate a passenger pressing floor button " + e.getDirection() + " on floor "
+						+ e.getRequestingFloor() + " then requesting to go to floor " + e.getDestinationFloor());
+				simulateFloorButtonPress(e.getRequestingFloor(), e.getDirection());
+				boolean activeLampStatus = floorButtonLampActiveStatus(e.getRequestingFloor(), e.getDirection());
+
+				print("Floor " + e.getDirection() + " lamp on floor " + e.getRequestingFloor() + (activeLampStatus ? " is On." : " is Off."));
+			}
+			while(true) { }
+
+			// Wait for elevator to reach floor 2 and the door opens
+			// Track that a passenger has entered the elevator
+			// Passenger presses a elevator button; floor 5
+			// confirm door closes
+			// elevator moves in requested direction
+			// elevator reaches destination floor
+			// door opens and passenger leaves the elevator
+//			try {
+//				Thread.sleep(1000);
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+		//}
 	}
 
 	public void simulateFloorButtonPress(int floor, Direction direction) {
@@ -185,12 +189,12 @@ public class PassengerSimulator {
 		PassengerSimulator systemSimulation = new PassengerSimulator(numOfFloors, numOfElevators);
 		System.out.println("Executing simulation: Start");
 		systemSimulation.execute();
-		//systemSimulation.shutdown();
+		systemSimulation.shutdown();
 		System.out.println("Executing simulation: End");
 	}
 
 	public void shutdown() throws InterruptedException {
-		this.scheduler.shutdown();
+		//this.scheduler.shutdown();
 		this.schedulerThread.join();
 //		for(Elevator e : listOfElevators) {
 //			e.shutdown();

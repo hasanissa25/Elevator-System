@@ -108,7 +108,7 @@ public class Elevator implements Runnable {
 			computedElevatorState = ElevatorState.ELEVATOR_MOVING_UP;
 		else if(elevatorMotor.getMotorState() == ElevatorMotorEnum.MOTOR_STATE_DOWN)
 			computedElevatorState = ElevatorState.ELEVATOR_MOVING_DOWN;
-		
+		System.out.println("Elevator " + this.elevatorNumber + ": Sending Arrival Data");
 		this.elevatorServer.sendCommandToHost(RequestType.arrivalSensorData, this.elevatorNumber, this.arrivalSensor.getCurrentFloorAt(), computedElevatorState.getId());
 		
 	}

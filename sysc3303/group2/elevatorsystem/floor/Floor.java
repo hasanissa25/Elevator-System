@@ -36,6 +36,7 @@ public class Floor {
 	}
 
 	// to pass to floorclient with a default hostport and a default hostip
+	// 8999 is the scheduler floor port, it receives all messages from floors
 	public Floor(int floorNumber) throws UnknownHostException {
 		this.floorNumber = floorNumber;
 		this.floorUpButton = new FloorButton(Direction.UP);
@@ -43,7 +44,7 @@ public class Floor {
 		this.floorUpButtonLamp = new FloorLamp();
 		this.floorDownButtonLamp = new FloorLamp();
 		this.floorDirectionLampsMap = new HashMap<>();
-		this.floorClient = new FloorClient(5000, InetAddress.getLocalHost().getHostName());
+		this.floorClient = new FloorClient(8999, InetAddress.getLocalHost().getHostName());
 	}
 
 	public FloorButton getFloorUpButton() {

@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 
 public class Scheduler implements Runnable {
 
-	private static final int DEFAULT_HOST_PORT = 5000;
+	private static final int DEFAULT_HOST_PORT = 8999;
 
 	private SchedulerHost schedulerHost;
 	private Map<Integer, ElevatorState> elevatorStateMap;
@@ -51,7 +51,6 @@ public class Scheduler implements Runnable {
 			Message m = schedulerHost.waitForANetworkRequest();
 			if (m == null)
 				continue;
-			System.out.println("Scheduler: Processing request: " + m);
 			switch (m.getRequestType()) {
 			case floorButtonDown:
 				processFloorButtonRequest(Direction.DOWN, m.getParameters().get(0));
@@ -75,7 +74,7 @@ public class Scheduler implements Runnable {
 				e.printStackTrace();
 			}
 		}
-
+		System.out.println("Scheduler Shutting Down!");
 		this.schedulerHost.shutdown();
 	}
 
@@ -116,7 +115,7 @@ public class Scheduler implements Runnable {
 		// floorNumberThatPressedButton));
 		//TODO: remove hard codes 
 		
-		int bestElevator = findBestElevator( direction,  floorNumberThatPressedButton);
+		int bestElevator = findBestElevator(direction,  floorNumberThatPressedButton);
 		
 		int elevatorAt = floorAtElevatorMap.get(bestElevator);
 

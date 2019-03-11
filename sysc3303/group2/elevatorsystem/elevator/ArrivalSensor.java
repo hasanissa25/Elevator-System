@@ -17,7 +17,7 @@ public class ArrivalSensor implements Runnable {
 		this.currentFloorAt = currentFloorAt;
 		this.elevatorMotor = elevatorMotor;
 		this.elevator = elevator;
-		System.out.println("Arrival Sensor: reached floor " + currentFloorAt);
+		System.out.println("Arrival Sensor: Created a new sensor on an elevator at floor " + currentFloorAt);
 	}
 
 	@Override
@@ -25,27 +25,21 @@ public class ArrivalSensor implements Runnable {
 		while (true) {
 			if (elevatorMotor.getMotorState() == ElevatorMotorEnum.MOTOR_STATE_DOWN) {
 				goDown();
-				this.elevator.sendArrivalData();
-				System.out.println("Arrival Sensor: reached floor " + currentFloorAt);
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			} else if (elevatorMotor.getMotorState() == ElevatorMotorEnum.MOTOR_STATE_UP) {
 				goUp();
-				this.elevator.sendArrivalData();
-				System.out.println("Arrival Sensor: reached floor " + currentFloorAt);
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}else if (elevatorMotor.getMotorState() == ElevatorMotorEnum.MOTOR_STATE_IDLE) {
 				try {
 					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(elevatorMotor.getMotorState() == ElevatorMotorEnum.MOTOR_STATE_DOWN || elevatorMotor.getMotorState() == ElevatorMotorEnum.MOTOR_STATE_UP){
+				this.elevator.sendArrivalData();
+				System.out.println("Arrival Sensor: reached floor " + currentFloorAt);
+				try {
+					Thread.sleep(3000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

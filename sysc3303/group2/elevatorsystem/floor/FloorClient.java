@@ -1,7 +1,7 @@
 package sysc3303.group2.elevatorsystem.floor;
 
 import java.io.IOException;
-/*	
+/*
  * Author: Hasan Issa
  * Contributors:
  * This is the network client that sends the request over the network to the scheduler
@@ -51,9 +51,10 @@ public class FloorClient {
 		s.getParameters().add(sourceFloor);
 		s.setRequestType(direction == Direction.UP ? RequestType.floorButtonUp : RequestType.floorButtonDown);
 		NetworkUtility.sendData(sendReceiveSocket, s, hostIp, hostPort);
+		System.out.println("Floor Client: Sent Request to port " + hostPort);
 	}
 
-	
+
 
 		// wait for an acknowledge signal back
 		/*
@@ -74,6 +75,6 @@ public class FloorClient {
 		else
 			return false;
 			*/
-	
-	
+
+
 }

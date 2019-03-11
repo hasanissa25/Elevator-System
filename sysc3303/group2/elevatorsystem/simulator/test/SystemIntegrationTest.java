@@ -19,7 +19,7 @@ public class SystemIntegrationTest {
 	@Before
 	public void setup() throws SocketException, UnknownHostException {
 		int numOfFloors = 10;
-		int numOfElevators = 1;
+		int numOfElevators = 2;
 		System.out.println(
 				"Initiating system simulation with " + numOfFloors + " floors and " + numOfElevators + " elevator...");
 		systemSimulation = new PassengerSimulator(numOfFloors, numOfElevators);

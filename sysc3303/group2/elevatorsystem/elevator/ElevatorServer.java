@@ -8,10 +8,7 @@ package sysc3303.group2.elevatorsystem.elevator;
  * communicating over the network and processing elevator commands 
  */
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
+import java.net.*;
 import java.util.Arrays;
 
 import sysc3303.group2.elevatorsystem.common.Direction;
@@ -27,10 +24,14 @@ public class ElevatorServer {
 	private DatagramSocket serverSocket;
 	private DatagramPacket elevatorInfo;
 	private int hostPort;
-		private String hostIp = "127.0.0.1";
+	private String hostIp;
+
+
+	private DatagramSocket sendSocket;
+
 	public ElevatorServer() {
 		this.portNumber = 5001;
-		this.hostPort = 5000;
+		this.hostPort = 9100;
 		
 		try {
 			serverSocket = new DatagramSocket(portNumber);  // Create a Datagram socket bound to this port
@@ -40,12 +41,23 @@ public class ElevatorServer {
 	}
 	public ElevatorServer(int n) {
 		this.portNumber = n;
-		this.hostPort = 5000;
-		
+		this.hostPort = 8999;
+		try {
+			sendSocket = new DatagramSocket(portNumber*2);
+		} catch (SocketException e) {
+			e.printStackTrace();
+		}
 		try {
 			serverSocket = new DatagramSocket(portNumber);  // Create a Datagram socket bound to this port
 		} catch (SocketException e) {
 			e.printStackTrace();
+		}
+		{
+			try {
+				hostIp = InetAddress.getLocalHost().getHostName();
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -54,14 +66,17 @@ public class ElevatorServer {
 		byte data[] = new byte[BUFFER_SIZE];
 		DatagramPacket receivePacket = new DatagramPacket(data, data.length);
 
+
 		// Block until a datagram packet is received from receiveSocket.
 		try {
 			serverSocket.receive(receivePacket);
 		} catch (IOException e) {
+			System.out.println(receivePacket);
 			//e.printStackTrace();
 		}
 
 		int len = receivePacket.getLength();
+		//System.out.println(len);
 		// Form a String from the byte array.
 		//System.out.println("Elevator received:");
 		//Utility.printByteArray(data, len);
@@ -79,11 +94,11 @@ public class ElevatorServer {
 
 	}
 	
-	public void sendCommandToHost(RequestType requestType, Integer... parameters) {
+	public void sendCommandToHost(RequestType requestType, Integer... parameters){
 		Message m = new Message();
-		m.setRequestType(requestType);
 		m.getParameters().addAll(Arrays.asList(parameters));
-		NetworkUtility.sendData(serverSocket, m, hostIp, hostPort);
+		m.setRequestType(requestType);
+		NetworkUtility.sendData(sendSocket, m, hostIp , hostPort);
 	}
 	
 	public int getPortNumber() {
