@@ -14,7 +14,7 @@
 	- Locate pulled repo
 	- Click 'Finish'
 3. From within the project run the PassengerSimulator.java located in
- - sysc3303 -> group2 -> elevatorsystem -> simulator -> PassengerSimulator.java
+	- sysc3303 -> group2 -> elevatorsystem -> simulator -> PassengerSimulator.java
 4. View actions in console window
 
 ## FILES:
