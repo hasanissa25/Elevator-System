@@ -78,6 +78,13 @@ simulator:
 
 ## Iteration 2
 
+For this iteration, you are to coordinate the movement of cars such that each car carries roughly the same
+number of passengers as all of the others and so that the waiting time for passengers at floors is minimized.
+Hint: if a passenger wants to go down and there is an elevator above the passenger, then that elevator should
+service the passenger rather than having a second elevator go up instead. The state machines for each car should
+execute independently of each other, but they will all have to share their position with the scheduler. The
+scheduler will choose which elevator will be used to service a given request.
+
 ### Hasan
 - Integration testing: put the system together and test all scenarios
 - black box testing
@@ -114,8 +121,35 @@ You must submit code to enable us to see that your elevator scheduler can deal p
 above (i.e., you must be able to inject these faults into the system). I suggest that you inject these faults using the
 input file (so you will have to modify its format and be able to show to us how it works). 
 
+### Hasan
+- 
+
+### George
+- Timing diagram showing error scenarios
 - Any unchanged diagrams from the previous iterations UML class diagram
-- Timing diagrams showing the error scenarios for this iteration
+
+### Jack
+
+## Iteration 4
+
+For this part, you will have to measure the performance of the scheduler subsystem. To do so, you will have to
+run the scheduler on a separate computer than the floor and elevator subsystems. You will have to repeat the
+measurements several times and with sufficient traffic in order to find, minimally, the mean and variance of the
+time the scheduler takes to service a request. Using these numbers, use Rate Monotonic Analysis to assign
+priorities to tasks as necessary. Deadlines for various events are as follows: 
+
+### Hasan
+
+### George
+
+### Jack
+
+## Iteration 5
+
+The last stage of the project is to add a display console showing where each of the elevators is in real time and
+displaying any faults (if any). The idea is to have output suitable for the concierge sitting at the desk in the
+front lobby to refer to. This part of the project can be part of the floor subsystem if you so choose, or you may
+want to develop a separate subsystem altogether. 
 
 ### Hasan
 
