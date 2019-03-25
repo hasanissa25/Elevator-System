@@ -6,9 +6,15 @@
 
 ## INSTRUCTIONS:
 1. git pull the repository above
-2. Extract the repo zip folder into Eclipse IDE
-3. Run the PassengerSimulator.java located in:
-- sysc3303 -> group2 -> elevatorsystem -> simulator -> PassengerSimulator.java
+2. Import project into Eclipse
+	- Select 'File' menu
+	- Select 'Import' menu item
+	- Under 'General' select 'Projects From File System'
+	- Select 'Archive'
+	- Locate pulled repo
+	- Click 'Finish'
+3. From within the project run the PassengerSimulator.java located in
+ - sysc3303 -> group2 -> elevatorsystem -> simulator -> PassengerSimulator.java
 4. View actions in console window
 
 ## FILES:
@@ -61,54 +67,32 @@ simulator:
 
 ## Breakdown of Responsibilities
 
-## Iteration 0 & 1
+## Iteration 5
+The last stage of the project is to add a display console showing where each of the elevators is in real time and
+displaying any faults (if any). The idea is to have output suitable for the concierge sitting at the desk in the
+front lobby to refer to. This part of the project can be part of the floor subsystem if you so choose, or you may
+want to develop a separate subsystem altogether. 
 
-### Hasan
-- UML CLass Diagram
-- System Design
-- Software Code
+- Hasan
 
-### George
-- Transfer UML to framework code
-- Software Code
-- State Machine Diagrams
+- George
 
-### Jack
-- Software Code
+- Jack
 
-## Iteration 2
+## Iteration 4
+For this part, you will have to measure the performance of the scheduler subsystem. To do so, you will have to
+run the scheduler on a separate computer than the floor and elevator subsystems. You will have to repeat the
+measurements several times and with sufficient traffic in order to find, minimally, the mean and variance of the
+time the scheduler takes to service a request. Using these numbers, use Rate Monotonic Analysis to assign
+priorities to tasks as necessary. Deadlines for various events are as follows: 
 
-For this iteration, you are to coordinate the movement of cars such that each car carries roughly the same
-number of passengers as all of the others and so that the waiting time for passengers at floors is minimized.
-Hint: if a passenger wants to go down and there is an elevator above the passenger, then that elevator should
-service the passenger rather than having a second elevator go up instead. The state machines for each car should
-execute independently of each other, but they will all have to share their position with the scheduler. The
-scheduler will choose which elevator will be used to service a given request.
+- Hasan
 
-### Hasan
-- Integration testing: put the system together and test all scenarios
-- black box testing
-- Simulator: set simulation environment and give access to tests as a passenger e.g pressing floor buttons,observing lamps, observing floors the elevator is at...
-- j unit testing: identity all the methods needed for tests: Which floor the elevator is currently at, access elevator object and compare to what the scheduler thinks its at  
-- The map tracks multiple elevators 
+- George
 
-### George
-Elevator:
-  - Send arrival sensor data to scheduler over network 
-  - Arrival sensor stopping at max floor
-  - Ability to receive stop motor commands
-  - Modify elevator requests to the scheduler to support multiple passengers
-  - Add j unit testing
+- Jack
 
-### Jack
-Scheduler:
-  - update to allow for multiple passengers per elevator(must have the elevator request code finished first)
-  - Support multiple elevators : processFloorButtonRequest
-  - implement todo elevatorButtonRequest in the run() method 
-  - implement the todo: processArrivalSensorData
-  
 ## Iteration 3
-
 For this iteration, you will be adding code for detecting and handling faults. To this end, you will have to add
 timing events so that if the timer goes off before an elevator reaches a floor, then your system should assume a
 fault (either, the elevator is stuck between floors, or the arrival sensor at a floor has failed). Similarly, you
@@ -121,38 +105,52 @@ You must submit code to enable us to see that your elevator scheduler can deal p
 above (i.e., you must be able to inject these faults into the system). I suggest that you inject these faults using the
 input file (so you will have to modify its format and be able to show to us how it works). 
 
-### Hasan
-- 
+- Hasan
+  - 
 
-### George
-- Timing diagram showing error scenarios
-- Any unchanged diagrams from the previous iterations UML class diagram
+- George
+  - Timing diagram showing error scenarios
+  - Any unchanged diagrams from the previous iterations UML class diagram
 
-### Jack
+- Jack
+  -
 
-## Iteration 4
+## Iteration 2
+For this iteration, you are to coordinate the movement of cars such that each car carries roughly the same
+number of passengers as all of the others and so that the waiting time for passengers at floors is minimized.
+Hint: if a passenger wants to go down and there is an elevator above the passenger, then that elevator should
+service the passenger rather than having a second elevator go up instead. The state machines for each car should
+execute independently of each other, but they will all have to share their position with the scheduler. The
+scheduler will choose which elevator will be used to service a given request.
 
-For this part, you will have to measure the performance of the scheduler subsystem. To do so, you will have to
-run the scheduler on a separate computer than the floor and elevator subsystems. You will have to repeat the
-measurements several times and with sufficient traffic in order to find, minimally, the mean and variance of the
-time the scheduler takes to service a request. Using these numbers, use Rate Monotonic Analysis to assign
-priorities to tasks as necessary. Deadlines for various events are as follows: 
+- Hasan
+  - Integration testing: put the system together and test all scenarios
+  - black box testing
+  - Simulator: set simulation environment and give access to tests as a passenger e.g pressing floor buttons,observing lamps, observing floors the elevator is at...
+  - j unit testing: identity all the methods needed for tests: Which floor the elevator is currently at, access elevator object and compare to what the scheduler thinks its at  
+  - The map tracks multiple elevators 
 
-### Hasan
+- George
+  - Send arrival sensor data to scheduler over network 
+  - Arrival sensor stopping at max floor
+  - Ability to receive stop motor commands
+  - Modify elevator requests to the scheduler to support multiple passengers
+  - Add j unit testing
 
-### George
+- Jack
+  - update to allow for multiple passengers per elevator(must have the elevator request code finished first)
+  - Support multiple elevators : processFloorButtonRequest
+  - implement todo elevatorButtonRequest in the run() method 
+  - implement the todo: processArrivalSensorData
 
-### Jack
-
-## Iteration 5
-
-The last stage of the project is to add a display console showing where each of the elevators is in real time and
-displaying any faults (if any). The idea is to have output suitable for the concierge sitting at the desk in the
-front lobby to refer to. This part of the project can be part of the floor subsystem if you so choose, or you may
-want to develop a separate subsystem altogether. 
-
-### Hasan
-
-### George
-
-### Jack
+## Iteration 0 & 1
+- Hasan
+  - UML CLass Diagram
+  - System Design
+  - Software Code
+- George
+  - Transfer UML to framework code
+  - Software Code
+  - State Machine Diagrams
+- Jack
+  - Software Code
